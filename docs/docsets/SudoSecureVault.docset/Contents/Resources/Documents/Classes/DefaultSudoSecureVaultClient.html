@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DefaultSudoSecureVaultClient Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Class/DefaultSudoSecureVaultClient" class="dashAnchor"></a>
+
+    <a title="DefaultSudoSecureVaultClient Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          SudoSecureVault 0.0.1 Docs
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">SudoSecureVault Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      DefaultSudoSecureVaultClient Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/CognitoUserPoolIdentityProvider.html">CognitoUserPoolIdentityProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/CognitoUserPoolIdentityProvider.html#/s:15SudoSecureVault31CognitoUserPoolIdentityProviderC6ConfigV">– Config</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultSudoSecureVaultClient.html">DefaultSudoSecureVaultClient</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/DefaultSudoSecureVaultClient.html#/s:15SudoSecureVault07DefaultabC6ClientC6ConfigV">– Config</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/SecureVaultOperation.html">SecureVaultOperation</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault16DeregisterResultO">DeregisterResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault21IdentityProviderErrorO">IdentityProviderError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault22RegisterOperationErrorO">RegisterOperationError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault14RegisterResultO">RegisterResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault0bC14OperationErrorO">SecureVaultOperationError</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault12SignInResultO">SignInResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault0abC11ClientErrorO">SudoSecureVaultClientError</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Extensions.html">Extensions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/AWSEndpoint.html">AWSEndpoint</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Extensions/Data.html">Data</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/IdentityProvider.html">IdentityProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/Metadata.html">Metadata</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/SudoSecureVaultClient.html">SudoSecureVaultClient</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/AuthenticationTokens.html">AuthenticationTokens</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs.html#/s:15SudoSecureVault18InitializationDataV">InitializationData</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs.html#/s:15SudoSecureVault5OwnerV">Owner</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/SudoSecureVaultClientConfigProvider.html">SudoSecureVaultClientConfigProvider</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/Vault.html">Vault</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/VaultMetadata.html">VaultMetadata</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content top-matter">
+            <h1>DefaultSudoSecureVaultClient</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DefaultSudoSecureVaultClient</span> <span class="p">:</span> <span class="kt"><a href="../Protocols/SudoSecureVaultClient.html">SudoSecureVaultClient</a></span></code></pre>
+
+                </div>
+              </div>
+            <p>Default implementation for <code><a href="../Protocols/SudoSecureVaultClient.html">SudoSecureVaultClient</a></code>.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault07DefaultabC6ClientC6ConfigV"></a>
+                    <a name="//apple_ref/swift/Struct/Config" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault07DefaultabC6ClientC6ConfigV">Config</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Configuration parameter names.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">struct</span> <span class="kt">Config</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP7versionSSvp"></a>
+                    <a name="//apple_ref/swift/Property/version" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP7versionSSvp">version</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault07DefaultabC6ClientC08sudoUserE06loggerAC0aG00agE0_p_0A7Logging6LoggerCSgtKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(sudoUserClient:logger:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault07DefaultabC6ClientC08sudoUserE06loggerAC0aG00agE0_p_0A7Logging6LoggerCSgtKcfc">init(sudoUserClient:<wbr>logger:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Intializes a new <code>DefaultSudoSecureVaultClient</code> instance.</p>
+<div class="aside aside-throws">
+    <p class="aside-title">Throws</p>
+    <code><a href="../Enums.html#/s:15SudoSecureVault0abC11ClientErrorO">SudoSecureVaultClientError</a></code>
+
+</div>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="n">convenience</span> <span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">sudoUserClient</span><span class="p">:</span> <span class="kt">SudoUserClient</span><span class="p">,</span> <span class="nv">logger</span><span class="p">:</span> <span class="kt">Logger</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sudoUserClient</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>SudoUserClient</code> instance required to issue authentication tokens and perform cryptographic operations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>logger</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A logger to use for logging messages. If none provided then a default internal logger will be used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault07DefaultabC6ClientC6config08sudoUserE010keyManager16identityProvider13graphQLClient6loggerACSDySSypG_0aH00ahE0_p0a3KeyJ0AM_pSgAA08IdentityL0_pSg10AWSAppSync0rsE0CSg0A7Logging6LoggerCSgtKcfc"></a>
+                    <a name="//apple_ref/swift/Method/init(config:sudoUserClient:keyManager:identityProvider:graphQLClient:logger:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault07DefaultabC6ClientC6config08sudoUserE010keyManager16identityProvider13graphQLClient6loggerACSDySSypG_0aH00ahE0_p0a3KeyJ0AM_pSgAA08IdentityL0_pSg10AWSAppSync0rsE0CSg0A7Logging6LoggerCSgtKcfc">init(config:<wbr>sudoUserClient:<wbr>keyManager:<wbr>identityProvider:<wbr>graphQLClient:<wbr>logger:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Intializes a new <code>DefaultSudoSecureVaultClient</code> instance.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="nf">init</span><span class="p">(</span><span class="nv">config</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span>
+            <span class="nv">sudoUserClient</span><span class="p">:</span> <span class="kt">SudoUserClient</span><span class="p">,</span>
+            <span class="nv">keyManager</span><span class="p">:</span> <span class="kt">SudoKeyManager</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">identityProvider</span><span class="p">:</span> <span class="kt"><a href="../Protocols/IdentityProvider.html">IdentityProvider</a></span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">graphQLClient</span><span class="p">:</span> <span class="kt">AWSAppSyncClient</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span>
+            <span class="nv">logger</span><span class="p">:</span> <span class="kt">Logger</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>config</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Configuration parameters for the client.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>sudoUserClient</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>SudoUserClient</code> instance required to issue authentication tokens and perform cryptographic operations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>keyManager</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p><code>SudoKeyManager</code> instance to use to perform cryptographic operations.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>identityProvider</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Identity provider to use to user management. Mainly used for unit testing.
+Mainly used for unit testing.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>graphQlClient</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>GrpahQL client to use for Secure Vault service API. Mainly used for unit testing.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>logger</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A logger to use for logging messages. If none provided then a default
+internal logger will be used.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP12isRegistered10completionyys6ResultOySbs5Error_pGc_tKF"></a>
+                    <a name="//apple_ref/swift/Method/isRegistered(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP12isRegistered10completionyys6ResultOySbs5Error_pGc_tKF">isRegistered(completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isRegistered</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Bool</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP8register3key8password10completiony10Foundation4DataV_AJys6ResultOySSs5Error_pGctKF"></a>
+                    <a name="//apple_ref/swift/Method/register(key:password:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP8register3key8password10completiony10Foundation4DataV_AJys6ResultOySSs5Error_pGctKF">register(key:<wbr>password:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">register</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP21getInitializationData10completionyys6ResultOyAA0fG0VSgs5Error_pGc_tKF"></a>
+                    <a name="//apple_ref/swift/Method/getInitializationData(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP21getInitializationData10completionyys6ResultOyAA0fG0VSgs5Error_pGc_tKF">getInitializationData(completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getInitializationData</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs.html#/s:15SudoSecureVault18InitializationDataV">InitializationData</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP10deregister10completionyys6ResultOySSs5Error_pGc_tKF"></a>
+                    <a name="//apple_ref/swift/Method/deregister(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP10deregister10completionyys6ResultOySSs5Error_pGc_tKF">deregister(completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deregister</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP06createC03key8password4blob0H6Format14ownershipProof10completiony10Foundation4DataV_A2MS2Sys6ResultOyAA0C8MetadataVs5Error_pGctKF"></a>
+                    <a name="//apple_ref/swift/Method/createVault(key:password:blob:blobFormat:ownershipProof:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP06createC03key8password4blob0H6Format14ownershipProof10completiony10Foundation4DataV_A2MS2Sys6ResultOyAA0C8MetadataVs5Error_pGctKF">createVault(key:<wbr>password:<wbr>blob:<wbr>blobFormat:<wbr>ownershipProof:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createVault</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">blob</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">blobFormat</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">ownershipProof</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VaultMetadata.html">VaultMetadata</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP06updateC03key8password2id7version4blob0J6Format10completiony10Foundation4DataV_ANSSSiANSSys6ResultOyAA0C8MetadataVs5Error_pGctKF"></a>
+                    <a name="//apple_ref/swift/Method/updateVault(key:password:id:version:blob:blobFormat:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP06updateC03key8password2id7version4blob0J6Format10completiony10Foundation4DataV_ANSSSiANSSys6ResultOyAA0C8MetadataVs5Error_pGctKF">updateVault(key:<wbr>password:<wbr>id:<wbr>version:<wbr>blob:<wbr>blobFormat:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateVault</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">version</span><span class="p">:</span> <span class="kt">Int</span><span class="p">,</span> <span class="nv">blob</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">blobFormat</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VaultMetadata.html">VaultMetadata</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP06deleteC02id10completionySS_ys6ResultOyAA0C8MetadataVSgs5Error_pGctKF"></a>
+                    <a name="//apple_ref/swift/Method/deleteVault(id:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP06deleteC02id10completionySS_ys6ResultOyAA0C8MetadataVSgs5Error_pGctKF">deleteVault(id:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">deleteVault</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/VaultMetadata.html">VaultMetadata</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP03getC03key8password2id10completiony10Foundation4DataV_AKSSys6ResultOyAA0C0VSgs5Error_pGctKF"></a>
+                    <a name="//apple_ref/swift/Method/getVault(key:password:id:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP03getC03key8password2id10completiony10Foundation4DataV_AKSSys6ResultOyAA0C0VSgs5Error_pGctKF">getVault(key:<wbr>password:<wbr>id:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getVault</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/Vault.html">Vault</a></span><span class="p">?,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP10listVaults3key8password10completiony10Foundation4DataV_AJys6ResultOySayAA0C0VGs5Error_pGctKF"></a>
+                    <a name="//apple_ref/swift/Method/listVaults(key:password:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP10listVaults3key8password10completiony10Foundation4DataV_AJys6ResultOySayAA0C0VGs5Error_pGctKF">listVaults(key:<wbr>password:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVaults</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/Vault.html">Vault</a></span><span class="p">],</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP22listVaultsMetadataOnly10completionyys6ResultOySayAA0cG0VGs5Error_pGc_tKF"></a>
+                    <a name="//apple_ref/swift/Method/listVaultsMetadataOnly(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP22listVaultsMetadataOnly10completionyys6ResultOySayAA0cG0VGs5Error_pGc_tKF">listVaultsMetadataOnly(completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">listVaultsMetadataOnly</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="p">[</span><span class="kt"><a href="../Structs/VaultMetadata.html">VaultMetadata</a></span><span class="p">],</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP06changeC8Password3key03oldF003newF010completiony10Foundation4DataV_A2Kys6ResultOyyts5Error_pGctKF"></a>
+                    <a name="//apple_ref/swift/Method/changeVaultPassword(key:oldPassword:newPassword:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP06changeC8Password3key03oldF003newF010completiony10Foundation4DataV_A2Kys6ResultOyyts5Error_pGctKF">changeVaultPassword(key:<wbr>oldPassword:<wbr>newPassword:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">changeVaultPassword</span><span class="p">(</span><span class="nv">key</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">oldPassword</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">newPassword</span><span class="p">:</span> <span class="kt">Data</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">Void</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault0abC6ClientP5resetyyKF"></a>
+                    <a name="//apple_ref/swift/Method/reset()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault0abC6ClientP5resetyyKF">reset()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">reset</span><span class="p">()</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2020 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2020-10-14)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
