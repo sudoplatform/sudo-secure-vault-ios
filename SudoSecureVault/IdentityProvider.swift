@@ -31,25 +31,6 @@ public enum IdentityProviderError: Error {
     case fatalError(description: String)
 }
 
-/// Result of register API.
-public enum RegisterResult {
-    case success(uid: String)
-    case failure(cause: Error)
-}
-
-/// Result of de-register API.
-public enum DeregisterResult {
-    case success(uid: String)
-    case failure(cause: Error)
-}
-
-/// Result of sign in API. The API can fail with an error or return a set of
-/// authentication tokens and ID and access token lifetime in seconds.
-public enum SignInResult {
-    case success(tokens: AuthenticationTokens)
-    case failure(cause: Error)
-}
-
 /// Encapsulates interface requirements for an external identity provider to register and
 /// authenticate an identity within Sudo platform ecosystem.
 public protocol IdentityProvider: class {
@@ -63,33 +44,35 @@ public protocol IdentityProvider: class {
     ///   - authenticationSalt: Authentication salt.
     ///   - encryptionSalt: Encryption salt.
     ///   - pbkdfRounds: PBKDF rounds.
-    ///   - completion: The completion handler to invoke to pass the registration result.
+    ///   - completion: The completion handler to invoke to pass the newly created user Id or error.
     func register(uid: String,
                   password: String,
                   token: String,
                   authenticationSalt: String,
                   encryptionSalt: String,
                   pbkdfRounds: UInt32,
-                  completion: @escaping (RegisterResult) -> Void) throws
-
-    /// Deregisters an identity (user) from the identity provider.
-    ///
-    /// - Parameters:
-    ///   - uid: ID of the identity (user).
-    ///   - accessToken: Access token used to authenticate and authorize the request.
-    ///   - completion: The completion handler to invoke to pass the deregistration result.
-    func deregister(uid: String,
-                    accessToken: String,
-                    completion: @escaping (DeregisterResult) -> Void) throws
+                  completion: @escaping (Swift.Result<String, Error>) -> Void) throws
 
     /// Sign into the identity provider.
     ///
     /// - Parameters:
     ///   - uid: ID of the identity (user) to sign in.
     ///   - password: Password.
-    ///   - completion: The completion handler to invoke to pass the sign in result.
+    ///   - completion: The completion handler to invoke to pass the authentication tokens or error.
     func signIn(uid: String,
                 password: String,
-                completion: @escaping (SignInResult) -> Void) throws
+                completion: @escaping (Swift.Result<AuthenticationTokens, Error>) -> Void) throws
+
+    /// Change the user's password.
+    ///
+    /// - Parameters:
+    ///   - uid: ID of the identity (user).
+    ///   - oldPassword: Old password.
+    ///   - newPassword: New password..
+    ///   - completion: The completion handler to invoke to pass the user ID or error.
+    func changePassword(uid: String,
+                        oldPassword: String,
+                        newPassword: String,
+                        completion: @escaping (Swift.Result<String, Error>) -> Void) throws
 
 }

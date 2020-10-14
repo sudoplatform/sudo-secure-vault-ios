@@ -15,6 +15,8 @@
 		D928A86D22D8558600D270B6 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = D928A86C22D8558600D270B6 /* Auth0.plist */; };
 		D94474A4227BEDF400C0872E /* CognitoUserPoolIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94474A3227BEDF400C0872E /* CognitoUserPoolIdentityProvider.swift */; };
 		D944EA9123597C8C00508708 /* SudoSecureVault-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A68FDF22406BDC0073C07C /* SudoSecureVault-Swift.h */; };
+		D9457DFA2536C39D0009271A /* Deregister.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9457DF92536C39D0009271A /* Deregister.swift */; };
+		D9457E012536C6CC0009271A /* ChangePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9457E002536C6CC0009271A /* ChangePassword.swift */; };
 		D94A116722407F2400271C28 /* SudoSecureVaultClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A113F22407F2200271C28 /* SudoSecureVaultClient.swift */; };
 		D94A117322407F2400271C28 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A114B22407F2200271C28 /* Version.swift */; };
 		D94A117A22407F2400271C28 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94A115222407F2300271C28 /* Register.swift */; };
@@ -126,6 +128,8 @@
 		D901A9E023D6C44400A3FC70 /* sudoplatformconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sudoplatformconfig.json; sourceTree = "<group>"; };
 		D928A86C22D8558600D270B6 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		D94474A3227BEDF400C0872E /* CognitoUserPoolIdentityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoUserPoolIdentityProvider.swift; sourceTree = "<group>"; };
+		D9457DF92536C39D0009271A /* Deregister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deregister.swift; sourceTree = "<group>"; };
+		D9457E002536C6CC0009271A /* ChangePassword.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePassword.swift; sourceTree = "<group>"; };
 		D94A113F22407F2200271C28 /* SudoSecureVaultClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SudoSecureVaultClient.swift; sourceTree = "<group>"; };
 		D94A114B22407F2200271C28 /* Version.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		D94A115222407F2300271C28 /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
@@ -382,12 +386,14 @@
 				D94A115222407F2300271C28 /* Register.swift */,
 				D9FE013B23A7348F009C0B60 /* SecureVaultOperationQueue.swift */,
 				D95FB71824247D6000218486 /* SignIn.swift */,
+				D9457E002536C6CC0009271A /* ChangePassword.swift */,
 				D9FD303A2533D00700415306 /* CreateVault.swift */,
 				D9FD30482533FD8200415306 /* ListVaults.swift */,
 				D9A800332536A3EE004BDAF9 /* GetVault.swift */,
 				D9A800192536A1C2004BDAF9 /* ListVaultsMetadataOnly.swift */,
 				D9FD30412533FD6B00415306 /* UpdateVault.swift */,
 				D9A800202536A3D0004BDAF9 /* DeleteVault.swift */,
+				D9457DF92536C39D0009271A /* Deregister.swift */,
 			);
 			name = Operation;
 			sourceTree = "<group>";
@@ -871,6 +877,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9CAEF36224369D400D8D4B5 /* Dictionary.swift in Sources */,
+				D9457DFA2536C39D0009271A /* Deregister.swift in Sources */,
 				D9A800342536A3EE004BDAF9 /* GetVault.swift in Sources */,
 				D9CAEF34224369D400D8D4B5 /* NSNumber.swift in Sources */,
 				D9FD0033246227920038A040 /* DefaultSudoSecureVaultClient.swift in Sources */,
@@ -889,6 +896,7 @@
 				D94A117F22407F2400271C28 /* SecureVaultOperation.swift in Sources */,
 				D9FD303B2533D00700415306 /* CreateVault.swift in Sources */,
 				D94A118822407F2400271C28 /* Logger.swift in Sources */,
+				D9457E012536C6CC0009271A /* ChangePassword.swift in Sources */,
 				D9FE013C23A7348F009C0B60 /* SecureVaultOperationQueue.swift in Sources */,
 				D94A117A22407F2400271C28 /* Register.swift in Sources */,
 				D9CAEF39224369D400D8D4B5 /* Date.swift in Sources */,

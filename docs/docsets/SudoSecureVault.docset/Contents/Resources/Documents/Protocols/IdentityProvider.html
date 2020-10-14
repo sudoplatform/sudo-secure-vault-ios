@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="../index.html">
-          SudoSecureVault 0.0.3 Docs
+          SudoSecureVault 0.0.4 Docs
         </a>
         
       </p>
@@ -68,22 +68,13 @@
             <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault16DeregisterResultO">DeregisterResult</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault21IdentityProviderErrorO">IdentityProviderError</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault22RegisterOperationErrorO">RegisterOperationError</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault14RegisterResultO">RegisterResult</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault0bC14OperationErrorO">SecureVaultOperationError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault12SignInResultO">SignInResult</a>
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Enums.html#/s:15SudoSecureVault0abC11ClientErrorO">SudoSecureVaultClientError</a>
@@ -164,9 +155,9 @@ authenticate an identity within Sudo platform ecosystem.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:15SudoSecureVault16IdentityProviderP8register3uid8password5token18authenticationSalt010encryptionK011pbkdfRounds10completionySS_S4Ss6UInt32VyAA14RegisterResultOctKF"></a>
+                    <a name="/s:15SudoSecureVault16IdentityProviderP8register3uid8password5token18authenticationSalt010encryptionK011pbkdfRounds10completionySS_S4Ss6UInt32Vys6ResultOySSs5Error_pGctKF"></a>
                     <a name="//apple_ref/swift/Method/register(uid:password:token:authenticationSalt:encryptionSalt:pbkdfRounds:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15SudoSecureVault16IdentityProviderP8register3uid8password5token18authenticationSalt010encryptionK011pbkdfRounds10completionySS_S4Ss6UInt32VyAA14RegisterResultOctKF">register(uid:<wbr>password:<wbr>token:<wbr>authenticationSalt:<wbr>encryptionSalt:<wbr>pbkdfRounds:<wbr>completion:<wbr>)</a>
+                    <a class="token" href="#/s:15SudoSecureVault16IdentityProviderP8register3uid8password5token18authenticationSalt010encryptionK011pbkdfRounds10completionySS_S4Ss6UInt32Vys6ResultOySSs5Error_pGctKF">register(uid:<wbr>password:<wbr>token:<wbr>authenticationSalt:<wbr>encryptionSalt:<wbr>pbkdfRounds:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -187,7 +178,7 @@ authenticate an identity within Sudo platform ecosystem.</p>
               <span class="nv">authenticationSalt</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
               <span class="nv">encryptionSalt</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
               <span class="nv">pbkdfRounds</span><span class="p">:</span> <span class="kt">UInt32</span><span class="p">,</span>
-              <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums.html#/s:15SudoSecureVault14RegisterResultO">RegisterResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+              <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -275,7 +266,7 @@ authenticate an identity within Sudo platform ecosystem.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The completion handler to invoke to pass the registration result.</p>
+                                  <p>The completion handler to invoke to pass the newly created user Id or error.</p>
                                 </div>
                               </td>
                             </tr>
@@ -288,81 +279,9 @@ authenticate an identity within Sudo platform ecosystem.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:15SudoSecureVault16IdentityProviderP10deregister3uid11accessToken10completionySS_SSyAA16DeregisterResultOctKF"></a>
-                    <a name="//apple_ref/swift/Method/deregister(uid:accessToken:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15SudoSecureVault16IdentityProviderP10deregister3uid11accessToken10completionySS_SSyAA16DeregisterResultOctKF">deregister(uid:<wbr>accessToken:<wbr>completion:<wbr>)</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Deregisters an identity (user) from the identity provider.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">deregister</span><span class="p">(</span><span class="nv">uid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-                <span class="nv">accessToken</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-                <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums.html#/s:15SudoSecureVault16DeregisterResultO">DeregisterResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
-
-                        </div>
-                      </div>
-                      <div>
-                        <h4>Parameters</h4>
-                        <table class="graybox">
-                          <tbody>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>uid</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>ID of the identity (user).</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>accessToken</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>Access token used to authenticate and authorize the request.</p>
-                                </div>
-                              </td>
-                            </tr>
-                            <tr>
-                              <td>
-                                <code>
-                                <em>completion</em>
-                                </code>
-                              </td>
-                              <td>
-                                <div>
-                                  <p>The completion handler to invoke to pass the deregistration result.</p>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:15SudoSecureVault16IdentityProviderP6signIn3uid8password10completionySS_SSyAA04SignG6ResultOctKF"></a>
+                    <a name="/s:15SudoSecureVault16IdentityProviderP6signIn3uid8password10completionySS_SSys6ResultOyAA20AuthenticationTokensVs5Error_pGctKF"></a>
                     <a name="//apple_ref/swift/Method/signIn(uid:password:completion:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15SudoSecureVault16IdentityProviderP6signIn3uid8password10completionySS_SSyAA04SignG6ResultOctKF">signIn(uid:<wbr>password:<wbr>completion:<wbr>)</a>
+                    <a class="token" href="#/s:15SudoSecureVault16IdentityProviderP6signIn3uid8password10completionySS_SSys6ResultOyAA20AuthenticationTokensVs5Error_pGctKF">signIn(uid:<wbr>password:<wbr>completion:<wbr>)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -379,7 +298,7 @@ authenticate an identity within Sudo platform ecosystem.</p>
                           <p class="aside-title">Swift</p>
                           <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">signIn</span><span class="p">(</span><span class="nv">uid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
             <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
-            <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt"><a href="../Enums.html#/s:15SudoSecureVault12SignInResultO">SignInResult</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+            <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt"><a href="../Structs/AuthenticationTokens.html">AuthenticationTokens</a></span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
 
                         </div>
                       </div>
@@ -419,7 +338,92 @@ authenticate an identity within Sudo platform ecosystem.</p>
                               </td>
                               <td>
                                 <div>
-                                  <p>The completion handler to invoke to pass the sign in result.</p>
+                                  <p>The completion handler to invoke to pass the authentication tokens or error.</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:15SudoSecureVault16IdentityProviderP14changePassword3uid03oldG003newG010completionySS_S2Sys6ResultOySSs5Error_pGctKF"></a>
+                    <a name="//apple_ref/swift/Method/changePassword(uid:oldPassword:newPassword:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:15SudoSecureVault16IdentityProviderP14changePassword3uid03oldG003newG010completionySS_S2Sys6ResultOySSs5Error_pGctKF">changePassword(uid:<wbr>oldPassword:<wbr>newPassword:<wbr>completion:<wbr>)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Change the user&rsquo;s password.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">changePassword</span><span class="p">(</span><span class="nv">uid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                    <span class="nv">oldPassword</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                    <span class="nv">newPassword</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span>
+                    <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">Swift</span><span class="o">.</span><span class="kt">Result</span><span class="o">&lt;</span><span class="kt">String</span><span class="p">,</span> <span class="kt">Error</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="k">throws</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>uid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ID of the identity (user).</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>oldPassword</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Old password.</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>newPassword</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>New password..</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion handler to invoke to pass the user ID or error.</p>
                                 </div>
                               </td>
                             </tr>
@@ -437,7 +441,7 @@ authenticate an identity within Sudo platform ecosystem.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2020 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2020-10-14)</p>
+      <p>&copy; 2020 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2020-10-15)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

@@ -91,7 +91,7 @@ public class CognitoUserPoolIdentityProvider: IdentityProvider {
                          authenticationSalt: String,
                          encryptionSalt: String,
                          pbkdfRounds: UInt32,
-                         completion: @escaping (RegisterResult) -> Void) throws {
+                         completion: @escaping (Swift.Result<String, Error>) -> Void) throws {
 
         let validationData = [
             AWSCognitoIdentityUserAttributeType(name: Constants.ValidationData.idToken, value: token),
@@ -106,48 +106,30 @@ public class CognitoUserPoolIdentityProvider: IdentityProvider {
             if let error = task.error as NSError? {
                 if let message = error.userInfo[Constants.ServiceError.message] as? String {
                     if message.contains(Constants.ServiceError.decodingError) {
-                        completion(.failure(cause: IdentityProviderError.invalidInput))
+                        completion(.failure(IdentityProviderError.invalidInput))
                     } else if message.contains(Constants.ServiceError.serviceError) {
-                        completion(.failure(cause: IdentityProviderError.serviceError))
+                        completion(.failure(IdentityProviderError.serviceError))
                     } else {
-                        completion(.failure(cause: error))
+                        completion(.failure(error))
                     }
                 } else {
-                    completion(.failure(cause: error))
+                    completion(.failure(error))
                 }
             } else if let result = task.result, let userConfirmed = result.userConfirmed {
                 if userConfirmed.boolValue {
-                    completion(.success(uid: uid))
+                    completion(.success(uid))
                 } else {
-                    completion(.failure(cause: IdentityProviderError.identityNotConfirmed))
+                    completion(.failure(IdentityProviderError.identityNotConfirmed))
                 }
             } else {
-                completion(RegisterResult.failure(cause: IdentityProviderError.fatalError(description: "Sign up result did not contain user confirmation status.")))
+                completion(.failure(IdentityProviderError.fatalError(description: "Sign up result did not contain user confirmation status.")))
             }
 
             return nil
         }
     }
 
-    public func deregister(uid: String, accessToken: String, completion: @escaping (DeregisterResult) -> Void) throws {
-        let provider = AWSCognitoIdentityProvider(forKey: Constants.secureVaultServiceName)
-        guard let deleteUserRequest = AWSCognitoIdentityProviderDeleteUserRequest() else {
-            throw IdentityProviderError.fatalError(description: "Failed to create a delete user request.")
-        }
-
-        deleteUserRequest.accessToken = accessToken
-        provider.deleteUser(deleteUserRequest).continueWith { (task) -> Any? in
-            if let error = task.error {
-                completion(.failure(cause: error))
-                return nil
-            }
-
-            completion(.success(uid: uid))
-            return nil
-        }
-    }
-
-    public func signIn(uid: String, password: String, completion: @escaping (SignInResult) -> Void) throws {
+    public func signIn(uid: String, password: String, completion: @escaping (Swift.Result<AuthenticationTokens, Error>) -> Void) throws {
         let user = self.userPool.getUser(uid)
 
         user.getSession(uid,
@@ -156,20 +138,37 @@ public class CognitoUserPoolIdentityProvider: IdentityProvider {
                         clientMetaData: nil,
                         isInitialCustomChallenge: false).continueWith { (task) -> Any? in
                             if let error = task.error {
-                                return completion(SignInResult.failure(cause: error))
+                                return completion(.failure(error))
                             } else if let result = task.result {
                                 guard let idToken = result.idToken?.tokenString,
                                       let accessToken = result.accessToken?.tokenString,
                                       let refreshToken = result.refreshToken?.tokenString,
                                       let expiration = result.expirationTime else {
-                                    return completion(.failure(cause: IdentityProviderError.authTokenMissing))
+                                    return completion(.failure(IdentityProviderError.authTokenMissing))
                                 }
 
-                                return completion(.success(tokens: AuthenticationTokens(idToken: idToken, accessToken: accessToken, refreshToken: refreshToken, lifetime: Int(floor(expiration.timeIntervalSince(Date()))))))
+                                return completion(.success(AuthenticationTokens(idToken: idToken, accessToken: accessToken, refreshToken: refreshToken, lifetime: Int(floor(expiration.timeIntervalSince(Date()))))))
                             } else {
-                                return completion(SignInResult.failure(cause: IdentityProviderError.fatalError(description: "Sign in completed successfully but result is missing.")))
+                                return completion(.failure(IdentityProviderError.fatalError(description: "Sign in completed successfully but result is missing.")))
                             }
                         }
+    }
+
+    public func changePassword(uid: String,
+                               oldPassword: String,
+                               newPassword: String,
+                               completion: @escaping (Swift.Result<String, Error>) -> Void) throws {
+        let user = self.userPool.getUser(uid)
+
+        user.changePassword(oldPassword, proposedPassword: newPassword).continueWith { (task) -> Any? in
+            if let error = task.error {
+                return completion(.failure(error))
+            } else if task.result != nil {
+                return completion(.success(uid))
+            } else {
+                return completion(.failure(IdentityProviderError.fatalError(description: "Change password completed successfully but result is missing.")))
+            }
+        }
     }
 
 }

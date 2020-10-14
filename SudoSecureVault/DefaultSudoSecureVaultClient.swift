@@ -278,7 +278,27 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
 
     public func deregister(completion: @escaping (Swift.Result<String, Error>) -> Void) throws {
         self.logger.info("Performing deregistration.")
-        fatalError("Not implemented.")
+
+        guard try self.sudoUserClient.isSignedIn() else {
+            throw SudoSecureVaultClientError.notSignedIn
+        }
+
+        let deregisterOp = Deregister(graphQLClient: self.graphQLClient, logger: self.logger)
+
+        deregisterOp.completionBlock = {
+            if let error = deregisterOp.error {
+                completion(.failure(error))
+            } else {
+                guard let uid = deregisterOp.uid else {
+                    return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Deregister operation completed successfully but no user ID was returned.")))
+                }
+
+                self.initializationData = nil
+                completion(.success(uid))
+            }
+        }
+
+        self.apiOperationQueue.addOperation(deregisterOp)
     }
 
     public func createVault(key: Data, password: Data, blob: Data, blobFormat: String, ownershipProof: String, completion: @escaping (Swift.Result<VaultMetadata, Error>) -> Void) throws {
@@ -499,7 +519,77 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
 
     public func changeVaultPassword(key: Data, oldPassword: Data, newPassword: Data, completion: @escaping (Swift.Result<Void, Error>) -> Void) throws {
         self.logger.info("Changing vault password.")
-        fatalError("Not implemented.")
+
+        guard let sub = try self.sudoUserClient.getSubject() else {
+            throw SudoSecureVaultClientError.notSignedIn
+        }
+
+        guard let initializationData = self.initializationData else {
+            throw SudoSecureVaultClientError.notRegistered
+        }
+
+        var oldAuthenticationSecret = try self.generateSecretKeyData(key: key, password: oldPassword, salt: initializationData.authenticationSalt, rounds: UInt32(initializationData.pbkdfRounds))
+
+        var newAuthenticationSecret = try self.generateSecretKeyData(key: key, password: newPassword, salt: initializationData.authenticationSalt, rounds: UInt32(initializationData.pbkdfRounds))
+
+        let signInOp = SignIn(uid: sub, password: oldAuthenticationSecret.base64EncodedString(), identityProvider: self.identityProvider, logger: self.logger)
+
+        var oldEncryptionSecret = try self.generateSecretKeyData(key: key, password: oldPassword, salt: initializationData.encryptionSalt, rounds: UInt32(initializationData.pbkdfRounds))
+
+        var newEncryptionSecret = try self.generateSecretKeyData(key: key, password: newPassword, salt: initializationData.encryptionSalt, rounds: UInt32(initializationData.pbkdfRounds))
+
+        let listVaultsOp = ListVaults(key: oldEncryptionSecret, keyManager: self.keyManager, graphQLClient: self.graphQLClient, logger: self.logger)
+        listVaultsOp.copyDependenciesOutputAsInput = true
+        listVaultsOp.addDependency(signInOp)
+
+        let changePasswordOp = ChangePassword(uid: sub, oldPassword: oldAuthenticationSecret.base64EncodedString(), newPassword: newAuthenticationSecret.base64EncodedString(), identityProvider: self.identityProvider, logger: self.logger)
+        changePasswordOp.addDependency(listVaultsOp)
+
+        let operations = [signInOp, listVaultsOp, changePasswordOp]
+
+        changePasswordOp.completionBlock = {
+            oldAuthenticationSecret.fill(byte: 0)
+            oldEncryptionSecret.fill(byte: 0)
+
+            if let error = operations.compactMap({ $0.error }).first {
+                completion(.failure(error))
+            } else {
+                var updateVaultOps: [SecureVaultOperation] = []
+                for vault in listVaultsOp.vaults {
+                    let signInOp = SignIn(uid: sub, password: newAuthenticationSecret.base64EncodedString(), identityProvider: self.identityProvider, logger: self.logger)
+                    if let lastOp = updateVaultOps.last {
+                        signInOp.addDependency(lastOp)
+                    }
+                    updateVaultOps.append(signInOp)
+
+                    let updateVaultOp = UpdateVault(key: newEncryptionSecret, id: vault.id, expectedVersion: vault.version, blob: vault.blob, blobFormat: vault.blobFormat, keyManager: self.keyManager, graphQLClient: self.graphQLClient, logger: self.logger)
+                    updateVaultOp.addDependency(signInOp)
+                    updateVaultOp.copyDependenciesOutputAsInput = true
+                    updateVaultOps.append(updateVaultOp)
+                }
+
+                if let lastOp = updateVaultOps.last {
+                    lastOp.completionBlock = {
+                        newAuthenticationSecret.fill(byte: 0)
+                        newEncryptionSecret.fill(byte: 0)
+
+                        if let error = operations.compactMap({ $0.error }).first {
+                            completion(.failure(error))
+                        } else {
+                            completion(.success(()))
+                        }
+                    }
+
+                    self.apiOperationQueue.addOperations(updateVaultOps, waitUntilFinished: false)
+                } else {
+                    newAuthenticationSecret.fill(byte: 0)
+                    newEncryptionSecret.fill(byte: 0)
+                    completion(.success(()))
+                }
+            }
+        }
+
+        self.apiOperationQueue.addOperations(operations, waitUntilFinished: false)
     }
 
     public func reset() throws {
