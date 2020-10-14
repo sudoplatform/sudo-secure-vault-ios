@@ -370,13 +370,70 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
     }
 
     public func deleteVault(id: String, completion: @escaping (Swift.Result<VaultMetadata?, Error>) -> Void) throws {
-        self.logger.info("Delete a vault.")
-        fatalError("Not implemented.")
+        self.logger.info("Deleting a vault.")
+
+        guard try self.sudoUserClient.isSignedIn() else {
+            throw SudoSecureVaultClientError.notSignedIn
+        }
+
+        let deleteVaultOp = DeleteVault(id: id, graphQLClient: self.graphQLClient, logger: self.logger)
+
+        deleteVaultOp.completionBlock = {
+            if let error = deleteVaultOp.error {
+                completion(.failure(error))
+            } else {
+                guard let vaultMetadata = deleteVaultOp.vaultMetada else {
+                    return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Delete vault operation completed successfully but no vault metadata was returned.")))
+                }
+                completion(.success(vaultMetadata))
+            }
+        }
+
+        self.apiOperationQueue.addOperation(deleteVaultOp)
     }
 
     public func getVault(key: Data, password: Data, id: String, completion: @escaping (Swift.Result<Vault?, Error>) -> Void) throws {
         self.logger.info("Retrieving a vault: id=\(id).")
-        fatalError("Not implemented.")
+
+        guard try self.sudoUserClient.isSignedIn() else {
+            throw SudoSecureVaultClientError.notSignedIn
+        }
+
+        guard let sub = try self.sudoUserClient.getSubject() else {
+            throw SudoSecureVaultClientError.fatalError(description: "Cannot retrieve sub of signed in user.")
+        }
+
+        guard let initializationData = self.initializationData else {
+            throw SudoSecureVaultClientError.notRegistered
+        }
+
+        var authenticationSecret = try self.generateSecretKeyData(key: key, password: password, salt: initializationData.authenticationSalt, rounds: UInt32(initializationData.pbkdfRounds))
+
+        let signInOp = SignIn(uid: sub, password: authenticationSecret.base64EncodedString(), identityProvider: self.identityProvider, logger: self.logger)
+
+        var encryptionSecret = try self.generateSecretKeyData(key: key, password: password, salt: initializationData.encryptionSalt, rounds: UInt32(initializationData.pbkdfRounds))
+
+        let getVaultOp = GetVault(key: encryptionSecret, id: id, keyManager: self.keyManager, graphQLClient: self.graphQLClient, logger: self.logger)
+        getVaultOp.copyDependenciesOutputAsInput = true
+        getVaultOp.addDependency(signInOp)
+
+        let operations = [signInOp, getVaultOp]
+
+        getVaultOp.completionBlock = {
+            authenticationSecret.fill(byte: 0)
+            encryptionSecret.fill(byte: 0)
+
+            if let error = operations.compactMap({ $0.error }).first {
+                completion(.failure(error))
+            } else {
+                guard let vault = getVaultOp.vault else {
+                    return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Update vault operation completed successfully but no vault metadata was returned.")))
+                }
+                completion(.success(vault))
+            }
+        }
+
+        self.apiOperationQueue.addOperations(operations, waitUntilFinished: false)
     }
 
     public func listVaults(key: Data, password: Data, completion: @escaping (Swift.Result<[Vault], Error>) -> Void) throws {
@@ -422,7 +479,22 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
 
     public func listVaultsMetadataOnly(completion: @escaping (Swift.Result<[VaultMetadata], Error>) -> Void) throws {
         self.logger.info("Retrieving vaults (metadata only).")
-        fatalError("Not implemented.")
+
+        guard try self.sudoUserClient.isSignedIn() else {
+            throw SudoSecureVaultClientError.notSignedIn
+        }
+
+        let listVaultsMetadataOnlyOp = ListVaultsMetadataOnly(graphQLClient: self.graphQLClient, logger: self.logger)
+
+        listVaultsMetadataOnlyOp.completionBlock = {
+            if let error = listVaultsMetadataOnlyOp.error {
+                completion(.failure(error))
+            } else {
+                completion(.success(listVaultsMetadataOnlyOp.vaults))
+            }
+        }
+
+        self.apiOperationQueue.addOperation(listVaultsMetadataOnlyOp)
     }
 
     public func changeVaultPassword(key: Data, oldPassword: Data, newPassword: Data, completion: @escaping (Swift.Result<Void, Error>) -> Void) throws {

@@ -33,6 +33,9 @@
 		D9A4351D237937CB007FB579 /* SudoSecureVaultClientConfigProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A4351C237937CB007FB579 /* SudoSecureVaultClientConfigProvider.swift */; };
 		D9A68FE622406BDC0073C07C /* SudoSecureVault.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A68FDC22406BDC0073C07C /* SudoSecureVault.framework */; };
 		D9A68FEB22406BDC0073C07C /* SudoSecureVaultTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A68FEA22406BDC0073C07C /* SudoSecureVaultTests.swift */; };
+		D9A8001A2536A1C2004BDAF9 /* ListVaultsMetadataOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A800192536A1C2004BDAF9 /* ListVaultsMetadataOnly.swift */; };
+		D9A800212536A3D0004BDAF9 /* DeleteVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A800202536A3D0004BDAF9 /* DeleteVault.swift */; };
+		D9A800342536A3EE004BDAF9 /* GetVault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A800332536A3EE004BDAF9 /* GetVault.swift */; };
 		D9CAEF34224369D400D8D4B5 /* NSNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CAEF2E224369D400D8D4B5 /* NSNumber.swift */; };
 		D9CAEF35224369D400D8D4B5 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CAEF2F224369D400D8D4B5 /* Array.swift */; };
 		D9CAEF36224369D400D8D4B5 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9CAEF30224369D400D8D4B5 /* Dictionary.swift */; };
@@ -151,6 +154,9 @@
 		D9A68FE522406BDC0073C07C /* SudoSecureVaultTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudoSecureVaultTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9A68FEA22406BDC0073C07C /* SudoSecureVaultTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudoSecureVaultTests.swift; sourceTree = "<group>"; };
 		D9A68FEC22406BDC0073C07C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9A800192536A1C2004BDAF9 /* ListVaultsMetadataOnly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListVaultsMetadataOnly.swift; sourceTree = "<group>"; };
+		D9A800202536A3D0004BDAF9 /* DeleteVault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteVault.swift; sourceTree = "<group>"; };
+		D9A800332536A3EE004BDAF9 /* GetVault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetVault.swift; sourceTree = "<group>"; };
 		D9AED2D62252E65F004ABA24 /* SampleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9CAEF2E224369D400D8D4B5 /* NSNumber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSNumber.swift; sourceTree = "<group>"; };
 		D9CAEF2F224369D400D8D4B5 /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -378,7 +384,10 @@
 				D95FB71824247D6000218486 /* SignIn.swift */,
 				D9FD303A2533D00700415306 /* CreateVault.swift */,
 				D9FD30482533FD8200415306 /* ListVaults.swift */,
+				D9A800332536A3EE004BDAF9 /* GetVault.swift */,
+				D9A800192536A1C2004BDAF9 /* ListVaultsMetadataOnly.swift */,
 				D9FD30412533FD6B00415306 /* UpdateVault.swift */,
+				D9A800202536A3D0004BDAF9 /* DeleteVault.swift */,
 			);
 			name = Operation;
 			sourceTree = "<group>";
@@ -862,6 +871,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9CAEF36224369D400D8D4B5 /* Dictionary.swift in Sources */,
+				D9A800342536A3EE004BDAF9 /* GetVault.swift in Sources */,
 				D9CAEF34224369D400D8D4B5 /* NSNumber.swift in Sources */,
 				D9FD0033246227920038A040 /* DefaultSudoSecureVaultClient.swift in Sources */,
 				D9FD30422533FD6B00415306 /* UpdateVault.swift in Sources */,
@@ -874,6 +884,7 @@
 				D94A116722407F2400271C28 /* SudoSecureVaultClient.swift in Sources */,
 				D9CAEF38224369D400D8D4B5 /* Data.swift in Sources */,
 				D9FD30492533FD8200415306 /* ListVaults.swift in Sources */,
+				D9A8001A2536A1C2004BDAF9 /* ListVaultsMetadataOnly.swift in Sources */,
 				D9CAEF35224369D400D8D4B5 /* Array.swift in Sources */,
 				D94A117F22407F2400271C28 /* SecureVaultOperation.swift in Sources */,
 				D9FD303B2533D00700415306 /* CreateVault.swift in Sources */,
@@ -884,6 +895,7 @@
 				D9A4351D237937CB007FB579 /* SudoSecureVaultClientConfigProvider.swift in Sources */,
 				D9017FF0252BDF150059EB45 /* API.swift in Sources */,
 				D9CAEF37224369D400D8D4B5 /* NSLock.swift in Sources */,
+				D9A800212536A3D0004BDAF9 /* DeleteVault.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
