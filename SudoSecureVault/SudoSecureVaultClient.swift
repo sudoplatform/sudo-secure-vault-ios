@@ -165,7 +165,8 @@ public protocol SudoSecureVaultClient: class {
     ///   - password: Vault password.
     ///   - blob:  Blob to encrypt and store.
     ///   - blobFormat: Specifier for the format/structure of information represented in the blob.
-    ///   - ownershipProof: Ownership proof of the Sudo to be associate with the vault.
+    ///   - ownershipProof: Ownership proof of the Sudo to be associate with the vault. The ownership proof
+    ///                     must contain audience of "sudoplatform.secure-vault.vault".
     ///   - completion: The completion handler to invoke to pass the created vault's metadata or error.
     func createVault(
         key: Data,

@@ -231,6 +231,7 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
                 if let error = op.error {
                     completion(.failure(error))
                 } else {
+                    self.initializationData = InitializationData(owner: op.uid, authenticationSalt: authenticationSalt, encryptionSalt: encryptionSalt, pbkdfRounds: Int(self.pbkdfRounds))
                     completion(.success(op.uid))
                 }
             }
