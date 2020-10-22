@@ -42,6 +42,13 @@ public enum SudoSecureVaultClientError: Error {
 
 /// Data required to initialize the client.
 public struct InitializationData {
+    public init(owner: String, authenticationSalt: Data, encryptionSalt: Data, pbkdfRounds: Int) {
+        self.owner = owner
+        self.authenticationSalt = authenticationSalt
+        self.encryptionSalt = encryptionSalt
+        self.pbkdfRounds = pbkdfRounds
+    }
+
     public let owner: String
     public let authenticationSalt: Data
     public let encryptionSalt: Data
@@ -50,6 +57,11 @@ public struct InitializationData {
 
 /// Vault owner.
 public struct Owner {
+    public init(id: String, issuer: String) {
+        self.id = id
+        self.issuer = issuer
+    }
+
     public let id: String
     public let issuer: String
 }
@@ -80,6 +92,16 @@ public protocol Metadata {
 
 /// Vault metadata.
 public struct VaultMetadata: Metadata {
+    public init(id: String, owner: String, version: Int, blobFormat: String, createdAt: Date, updatedAt: Date, owners: [Owner]) {
+        self.id = id
+        self.owner = owner
+        self.version = version
+        self.blobFormat = blobFormat
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.owners = owners
+    }
+
 
     public let id: String
 
@@ -99,6 +121,17 @@ public struct VaultMetadata: Metadata {
 
 /// Vault.
 public struct Vault: Metadata {
+    public init(id: String, owner: String, version: Int, blobFormat: String, createdAt: Date, updatedAt: Date, owners: [Owner], blob: Data) {
+        self.id = id
+        self.owner = owner
+        self.version = version
+        self.blobFormat = blobFormat
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
+        self.owners = owners
+        self.blob = blob
+    }
+
 
     public let id: String
 
