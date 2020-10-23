@@ -141,6 +141,13 @@
       "warning": "undocumented"
     },
     {
+      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/MockSudoSecureVaultClient.swift",
+      "line": 9,
+      "symbol": "MockSudoSecureVaultClient",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/Register.swift",
       "line": 19,
       "symbol": "RegisterOperationError.identityNotConfirmed",
