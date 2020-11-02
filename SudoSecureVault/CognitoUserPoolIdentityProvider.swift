@@ -137,8 +137,13 @@ public class CognitoUserPoolIdentityProvider: IdentityProvider {
                         validationData: nil,
                         clientMetaData: nil,
                         isInitialCustomChallenge: false).continueWith { (task) -> Any? in
-                            if let error = task.error {
-                                return completion(.failure(error))
+                            if let error = task.error as NSError? {
+                                switch error.code {
+                                case AWSCognitoIdentityProviderErrorType.notAuthorized.rawValue:
+                                    return completion(.failure(IdentityProviderError.notAuthorized))
+                                default:
+                                    return completion(.failure(error))
+                                }
                             } else if let result = task.result {
                                 guard let idToken = result.idToken?.tokenString,
                                       let accessToken = result.accessToken?.tokenString,
@@ -161,8 +166,13 @@ public class CognitoUserPoolIdentityProvider: IdentityProvider {
         let user = self.userPool.getUser(uid)
 
         user.changePassword(oldPassword, proposedPassword: newPassword).continueWith { (task) -> Any? in
-            if let error = task.error {
-                return completion(.failure(error))
+            if let error = task.error as NSError? {
+                switch error.code {
+                case AWSCognitoIdentityProviderErrorType.notAuthorized.rawValue:
+                    return completion(.failure(IdentityProviderError.notAuthorized))
+                default:
+                    return completion(.failure(error))
+                }
             } else if task.result != nil {
                 return completion(.success(uid))
             } else {

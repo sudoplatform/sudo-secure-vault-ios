@@ -101,6 +101,14 @@ class CreateVault: SecureVaultOperation {
 
                 if let errorType = error[SecureVaultOperation.SecureVaultServiceError.type] as? String {
                     switch errorType {
+                    case SecureVaultOperation.SecureVaultServiceError.tokenValidationError:
+                        self.error = SudoSecureVaultClientError.notAuthorized
+                    case SecureVaultOperation.SecureVaultServiceError.notAuthorizedError:
+                        self.error = SudoSecureVaultClientError.notAuthorized
+                    case SecureVaultOperation.SecureVaultServiceError.invalidOwnershipProofError:
+                        self.error = SudoSecureVaultClientError.invalidOwnershipProofError
+                    case SecureVaultOperation.SecureVaultServiceError.policyError:
+                        self.error = SudoSecureVaultClientError.policyError
                     case SecureVaultOperation.SecureVaultServiceError.serviceError:
                         self.error = SudoSecureVaultClientError.serviceError
                     default:

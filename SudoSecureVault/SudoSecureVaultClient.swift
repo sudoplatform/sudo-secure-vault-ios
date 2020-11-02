@@ -14,11 +14,17 @@ import UIKit
 /// - notRegistered: Indicates the client has not been registered to the
 ///     Sudo platform backend.
 /// - notSignedIn: Indicates the API being called requires the client to sign in.
-/// - invalidConfig: Indicates the configuration dictionary passed to initialize the client was not valid.
+/// - notSignedIn: Indicates the API being called requires the client to sign in.
+/// - invalidOwnershipProofError: Indicates the ownership proof provided for the new vault was invalid.
 /// - authTokenMissing: Thrown when required authentication tokens were not return by Secure Vault service.
+/// - versionMismatch: Indicates the version of the vault that is getting updated does not match
+///     the current version of the vault stored in the backend. The caller should retrieve the
+///     current version of the vault and reconcile the difference..
 /// - notAuthorized: Indicates the authentication failed. Likely due to incorrect private key, the identity
 ///     being removed from the backend or significant clock skew between the client and the backend.
 /// - invalidInput: Indicates the input to the API was invalid.
+/// - policyError: Operation failed due to the backend policy error. This maybe due to the user not
+///     having sufficient entitlements or exceeding some other service limit.
 /// - serviceError: Indicates that an internal server error caused the operation to fail. The error is
 ///     possibly transient and retrying at a later time may cause the operation to complete
 ///     successfully
@@ -31,10 +37,13 @@ public enum SudoSecureVaultClientError: Error {
     case registerOperationAlreadyInProgress
     case notRegistered
     case notSignedIn
+    case invalidOwnershipProofError
     case invalidConfig
     case authTokenMissing
+    case versionMismatch
     case notAuthorized
     case invalidInput
+    case policyError
     case serviceError
     case graphQLError(description: String)
     case fatalError(description: String)
