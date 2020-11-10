@@ -14,7 +14,7 @@ extension Date {
     init(millisecondsSinceEpoch: Double) {
         self.init(timeIntervalSince1970: millisecondsSinceEpoch / 1000)
     }
-    
+
     /// Converts Date to NSNumber representing milliseconds since epoch.
     ///
     /// - Returns: Milliseconds since epoch.

@@ -401,7 +401,7 @@
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 133,
+      "line": 132,
       "symbol": "Vault.init(id:owner:version:blobFormat:createdAt:updatedAt:owners:blob:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

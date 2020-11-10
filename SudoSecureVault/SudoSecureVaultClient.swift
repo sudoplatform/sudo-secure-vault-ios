@@ -111,7 +111,6 @@ public struct VaultMetadata: Metadata {
         self.owners = owners
     }
 
-
     public let id: String
 
     public let owner: String
@@ -140,7 +139,6 @@ public struct Vault: Metadata {
         self.owners = owners
         self.blob = blob
     }
-
 
     public let id: String
 

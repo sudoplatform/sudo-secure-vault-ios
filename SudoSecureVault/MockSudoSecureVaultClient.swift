@@ -10,7 +10,6 @@ open class MockSudoSecureVaultClient: SudoSecureVaultClient {
 
     public var version: String = SUDO_SECURE_VAULT_VERSION
 
-
     public var isRegisteredCalled = false
     public var isRegisteredError: Error?
     public var isRegisteredResult: Result<Bool, Error> = .success(false)
@@ -27,22 +26,20 @@ open class MockSudoSecureVaultClient: SudoSecureVaultClient {
         if let e = resetError { throw e }
     }
 
-
     public var registerCalled = false
     public var registerParamKey: Data?
     public var registerParamPassword: Data?
     public var registerError: Error?
     public var registerResult: Result<String, Error> = .success("")
     open func register(key: Data,
-                  password: Data,
-                  completion: @escaping (Result<String, Error>) -> Void) throws {
+                       password: Data,
+                       completion: @escaping (Result<String, Error>) -> Void) throws {
         registerCalled = true
         registerParamKey = key
         registerParamPassword = password
         if let e = registerError { throw e }
         completion(registerResult)
     }
-
 
     public var getInitializationDataCalled = false
     public var getInitializationDataError: Error?
@@ -53,7 +50,6 @@ open class MockSudoSecureVaultClient: SudoSecureVaultClient {
         completion(getInitializationDataResult)
     }
 
-
     public var deregisterCalled = false
     public var deregisterError: Error?
     public var deregisterResult: Result<String, Error> = .success("")
@@ -62,7 +58,6 @@ open class MockSudoSecureVaultClient: SudoSecureVaultClient {
         if let error = deregisterError { throw error }
         completion(deregisterResult)
     }
-
 
     public var createVaultCalled = false
     public var createVaultParamKey: Data?
@@ -125,7 +120,6 @@ open class MockSudoSecureVaultClient: SudoSecureVaultClient {
         if let e = deleteVaultError { throw e }
         completion(deleteVaultResult)
     }
-
 
     public var getVaultCalled = false
     public var getVaultParamKey: Data?

@@ -205,8 +205,6 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
         }
 
         try self.queue.sync {
-            // TODO: Check if the user is already registered.
-
             guard self.registerOperationQueue.operationCount == 0 else {
                 throw SudoSecureVaultClientError.registerOperationAlreadyInProgress
             }
