@@ -27,7 +27,7 @@ open class SecureVaultOperation: Operation {
     struct SecureVaultServiceError {
         static let type = "errorType"
         static let serviceError = "sudoplatform.ServiceError"
-        static let policyError = "sudoplatform.PolicyFailed"
+        static let insufficientEntitlementsError = "sudoplatform.InsufficientEntitlementsError"
         static let conditionalCheckFailedException = "DynamoDB:ConditionalCheckFailedException"
         static let invalidOwnershipProofError = "sudoplatform.vault.InvalidOwnershipProofError"
         static let notAuthorizedError = "sudoplatform.vault.NotAuthorizedError"

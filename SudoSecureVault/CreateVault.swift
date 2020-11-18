@@ -107,8 +107,8 @@ class CreateVault: SecureVaultOperation {
                         self.error = SudoSecureVaultClientError.notAuthorized
                     case SecureVaultOperation.SecureVaultServiceError.invalidOwnershipProofError:
                         self.error = SudoSecureVaultClientError.invalidOwnershipProofError
-                    case SecureVaultOperation.SecureVaultServiceError.policyError:
-                        self.error = SudoSecureVaultClientError.policyError
+                    case SecureVaultOperation.SecureVaultServiceError.insufficientEntitlementsError:
+                        self.error = SudoSecureVaultClientError.insufficientEntitlements
                     case SecureVaultOperation.SecureVaultServiceError.serviceError:
                         self.error = SudoSecureVaultClientError.serviceError
                     default:

@@ -23,8 +23,7 @@ import UIKit
 /// - notAuthorized: Indicates the authentication failed. Likely due to incorrect private key, the identity
 ///     being removed from the backend or significant clock skew between the client and the backend.
 /// - invalidInput: Indicates the input to the API was invalid.
-/// - policyError: Operation failed due to the backend policy error. This maybe due to the user not
-///     having sufficient entitlements or exceeding some other service limit.
+/// - insufficientEntitlements: Operation failed due to the user not having sufficient entitlements.
 /// - serviceError: Indicates that an internal server error caused the operation to fail. The error is
 ///     possibly transient and retrying at a later time may cause the operation to complete
 ///     successfully
@@ -43,7 +42,7 @@ public enum SudoSecureVaultClientError: Error {
     case versionMismatch
     case notAuthorized
     case invalidInput
-    case policyError
+    case insufficientEntitlements
     case serviceError
     case graphQLError(description: String)
     case fatalError(description: String)
