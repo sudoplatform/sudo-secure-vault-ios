@@ -15,7 +15,7 @@ class DeleteVault: SecureVaultOperation {
 
     private let guid: String
 
-    public var vaultMetada: VaultMetadata?
+    public var vaultMetadata: VaultMetadata?
 
     /// Initializes and returns a `DeleteVault` operation.
     ///
@@ -46,20 +46,7 @@ class DeleteVault: SecureVaultOperation {
             }
 
             if let error = result.errors?.first {
-                let message = "Failed to delete a vault: \(error)"
-                self.logger.error(message)
-
-                if let errorType = error[SecureVaultOperation.SecureVaultServiceError.type] as? String {
-                    switch errorType {
-                    case SecureVaultOperation.SecureVaultServiceError.serviceError:
-                        self.error = SudoSecureVaultClientError.serviceError
-                    default:
-                        self.error = SudoSecureVaultClientError.graphQLError(description: message)
-                    }
-                } else {
-                    self.error = SudoSecureVaultClientError.graphQLError(description: message)
-                }
-
+                self.error = self.graphQLErrorToClientError(error: error)
                 return self.done()
             }
 
@@ -67,7 +54,7 @@ class DeleteVault: SecureVaultOperation {
                 self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
                 return self.done()
             }
-            self.vaultMetada = VaultMetadata(id: updateVault.id, owner: updateVault.owner, version: updateVault.version, blobFormat: updateVault.blobFormat, createdAt: Date(millisecondsSinceEpoch: updateVault.createdAtEpochMs), updatedAt: Date(millisecondsSinceEpoch: updateVault.updatedAtEpochMs), owners: updateVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }))
+            self.vaultMetadata = VaultMetadata(id: updateVault.id, owner: updateVault.owner, version: updateVault.version, blobFormat: updateVault.blobFormat, createdAt: Date(millisecondsSinceEpoch: updateVault.createdAtEpochMs), updatedAt: Date(millisecondsSinceEpoch: updateVault.updatedAtEpochMs), owners: updateVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }))
 
             self.done()
         })

@@ -76,24 +76,7 @@ class GetVault: SecureVaultOperation {
             }
 
             if let error = result.errors?.first {
-                let message = "Failed to retrieve a vault: \(error)"
-                self.logger.error(message)
-
-                if let errorType = error[SecureVaultOperation.SecureVaultServiceError.type] as? String {
-                    switch errorType {
-                    case SecureVaultOperation.SecureVaultServiceError.tokenValidationError:
-                        self.error = SudoSecureVaultClientError.notAuthorized
-                    case SecureVaultOperation.SecureVaultServiceError.notAuthorizedError:
-                        self.error = SudoSecureVaultClientError.notAuthorized
-                    case SecureVaultOperation.SecureVaultServiceError.serviceError:
-                        self.error = SudoSecureVaultClientError.serviceError
-                    default:
-                        self.error = SudoSecureVaultClientError.graphQLError(description: message)
-                    }
-                } else {
-                    self.error = SudoSecureVaultClientError.graphQLError(description: message)
-                }
-
+                self.error = self.graphQLErrorToClientError(error: error)
                 return self.done()
             }
 

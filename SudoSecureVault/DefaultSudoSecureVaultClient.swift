@@ -334,7 +334,7 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
             if let error = operations.compactMap({ $0.error }).first {
                 completion(.failure(error))
             } else {
-                guard let vaultMetadata = createVaultOp.vaultMetada else {
+                guard let vaultMetadata = createVaultOp.vaultMetadata else {
                     return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Create vault operation completed successfully but no vault metadata was returned.")))
                 }
                 completion(.success(vaultMetadata))
@@ -378,7 +378,7 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
             if let error = operations.compactMap({ $0.error }).first {
                 completion(.failure(error))
             } else {
-                guard let vaultMetadata = updateVaultOp.vaultMetada else {
+                guard let vaultMetadata = updateVaultOp.vaultMetadata else {
                     return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Update vault operation completed successfully but no vault metadata was returned.")))
                 }
                 completion(.success(vaultMetadata))
@@ -401,7 +401,7 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
             if let error = deleteVaultOp.error {
                 completion(.failure(error))
             } else {
-                guard let vaultMetadata = deleteVaultOp.vaultMetada else {
+                guard let vaultMetadata = deleteVaultOp.vaultMetadata else {
                     return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Delete vault operation completed successfully but no vault metadata was returned.")))
                 }
                 completion(.success(vaultMetadata))

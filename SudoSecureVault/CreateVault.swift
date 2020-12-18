@@ -35,7 +35,7 @@ class CreateVault: SecureVaultOperation {
 
     private let ownershipProofs: [String]
 
-    public var vaultMetada: VaultMetadata?
+    public var vaultMetadata: VaultMetadata?
 
     /// Initializes and returns a `CreateVault` operation.
     ///
@@ -96,28 +96,7 @@ class CreateVault: SecureVaultOperation {
             }
 
             if let error = result.errors?.first {
-                let message = "Failed to create a vault: \(error)"
-                self.logger.error(message)
-
-                if let errorType = error[SecureVaultOperation.SecureVaultServiceError.type] as? String {
-                    switch errorType {
-                    case SecureVaultOperation.SecureVaultServiceError.tokenValidationError:
-                        self.error = SudoSecureVaultClientError.notAuthorized
-                    case SecureVaultOperation.SecureVaultServiceError.notAuthorizedError:
-                        self.error = SudoSecureVaultClientError.notAuthorized
-                    case SecureVaultOperation.SecureVaultServiceError.invalidOwnershipProofError:
-                        self.error = SudoSecureVaultClientError.invalidOwnershipProofError
-                    case SecureVaultOperation.SecureVaultServiceError.insufficientEntitlementsError:
-                        self.error = SudoSecureVaultClientError.insufficientEntitlements
-                    case SecureVaultOperation.SecureVaultServiceError.serviceError:
-                        self.error = SudoSecureVaultClientError.serviceError
-                    default:
-                        self.error = SudoSecureVaultClientError.graphQLError(description: message)
-                    }
-                } else {
-                    self.error = SudoSecureVaultClientError.graphQLError(description: message)
-                }
-
+                self.error = self.graphQLErrorToClientError(error: error)
                 return self.done()
             }
 
@@ -125,7 +104,7 @@ class CreateVault: SecureVaultOperation {
                 self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
                 return self.done()
             }
-            self.vaultMetada = VaultMetadata(id: createVault.id, owner: createVault.owner, version: createVault.version, blobFormat: createVault.blobFormat, createdAt: Date(millisecondsSinceEpoch: createVault.createdAtEpochMs), updatedAt: Date(millisecondsSinceEpoch: createVault.updatedAtEpochMs), owners: createVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }))
+            self.vaultMetadata = VaultMetadata(id: createVault.id, owner: createVault.owner, version: createVault.version, blobFormat: createVault.blobFormat, createdAt: Date(millisecondsSinceEpoch: createVault.createdAtEpochMs), updatedAt: Date(millisecondsSinceEpoch: createVault.updatedAtEpochMs), owners: createVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }))
 
             self.done()
         })

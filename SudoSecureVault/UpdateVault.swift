@@ -37,7 +37,7 @@ class UpdateVault: SecureVaultOperation {
 
     private let blobFormat: String
 
-    public var vaultMetada: VaultMetadata?
+    public var vaultMetadata: VaultMetadata?
 
     /// Initializes and returns a `UpdateVault` operation.
     ///
@@ -101,26 +101,7 @@ class UpdateVault: SecureVaultOperation {
             }
 
             if let error = result.errors?.first {
-                let message = "Failed to update a vault: \(error)"
-                self.logger.error(message)
-
-                if let errorType = error[SecureVaultOperation.SecureVaultServiceError.type] as? String {
-                    switch errorType {
-                    case SecureVaultOperation.SecureVaultServiceError.tokenValidationError:
-                        self.error = SudoSecureVaultClientError.notAuthorized
-                    case SecureVaultOperation.SecureVaultServiceError.notAuthorizedError:
-                        self.error = SudoSecureVaultClientError.notAuthorized
-                    case SecureVaultOperation.SecureVaultServiceError.conditionalCheckFailedException:
-                        self.error = SudoSecureVaultClientError.versionMismatch
-                    case SecureVaultOperation.SecureVaultServiceError.serviceError:
-                        self.error = SudoSecureVaultClientError.serviceError
-                    default:
-                        self.error = SudoSecureVaultClientError.graphQLError(description: message)
-                    }
-                } else {
-                    self.error = SudoSecureVaultClientError.graphQLError(description: message)
-                }
-
+                self.error = self.graphQLErrorToClientError(error: error)
                 return self.done()
             }
 
@@ -128,7 +109,7 @@ class UpdateVault: SecureVaultOperation {
                 self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
                 return self.done()
             }
-            self.vaultMetada = VaultMetadata(id: updateVault.id, owner: updateVault.owner, version: updateVault.version, blobFormat: updateVault.blobFormat, createdAt: Date(millisecondsSinceEpoch: updateVault.createdAtEpochMs), updatedAt: Date(millisecondsSinceEpoch: updateVault.updatedAtEpochMs), owners: updateVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }))
+            self.vaultMetadata = VaultMetadata(id: updateVault.id, owner: updateVault.owner, version: updateVault.version, blobFormat: updateVault.blobFormat, createdAt: Date(millisecondsSinceEpoch: updateVault.createdAtEpochMs), updatedAt: Date(millisecondsSinceEpoch: updateVault.updatedAtEpochMs), owners: updateVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }))
 
             self.done()
         })

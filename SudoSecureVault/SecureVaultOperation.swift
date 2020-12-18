@@ -6,6 +6,7 @@
 
 import Foundation
 import SudoLogging
+import AWSAppSync
 
 /// List of possible errors returned by `SecureVaultOperation` and its subclasses.
 ///
@@ -210,6 +211,32 @@ open class SecureVaultOperation: Operation {
         self.willChangeValue(forKey: Constants.IsCancelled)
         self.stateLock.withCriticalScope { _cancelled = true }
         self.didChangeValue(forKey: Constants.IsCancelled)
+    }
+
+    open func graphQLErrorToClientError(error: GraphQLError) -> SudoSecureVaultClientError {
+        let message = "\(type(of: self)) received GraphQL error: \(error)"
+        self.logger.error(message)
+
+        if let errorType = error[SecureVaultOperation.SecureVaultServiceError.type] as? String {
+            switch errorType {
+            case SecureVaultOperation.SecureVaultServiceError.tokenValidationError:
+                return SudoSecureVaultClientError.notAuthorized
+            case SecureVaultOperation.SecureVaultServiceError.notAuthorizedError:
+                return SudoSecureVaultClientError.notAuthorized
+            case SecureVaultOperation.SecureVaultServiceError.invalidOwnershipProofError:
+                return SudoSecureVaultClientError.invalidOwnershipProofError
+            case SecureVaultOperation.SecureVaultServiceError.insufficientEntitlementsError:
+                return SudoSecureVaultClientError.insufficientEntitlements
+            case SecureVaultOperation.SecureVaultServiceError.conditionalCheckFailedException:
+                return SudoSecureVaultClientError.versionMismatch
+            case SecureVaultOperation.SecureVaultServiceError.serviceError:
+                return SudoSecureVaultClientError.serviceError
+            default:
+                return SudoSecureVaultClientError.graphQLError(description: message)
+            }
+        } else {
+            return SudoSecureVaultClientError.graphQLError(description: message)
+        }
     }
 
 }
