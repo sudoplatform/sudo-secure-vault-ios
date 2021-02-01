@@ -6,8 +6,6 @@ use_modular_headers!
 # Ignore all warnings from pods.
 inhibit_all_warnings!
 
-source 'https://github.com/CocoaPods/Specs.git'
-
 target "SudoSecureVault" do
   podspec :name => 'SudoSecureVault'
 end
