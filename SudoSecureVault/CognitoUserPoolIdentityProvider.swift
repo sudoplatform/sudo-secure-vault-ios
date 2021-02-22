@@ -29,6 +29,7 @@ public class CognitoUserPoolIdentityProvider: IdentityProvider {
             static let message = "message"
             static let decodingError = "sudoplatform.DecodingError"
             static let serviceError = "sudoplatform.ServiceError"
+            static let alreadyRegisteredError = "sudoplatform.vault.AlreadyRegistered"
         }
 
         struct ValidationData {
@@ -107,6 +108,8 @@ public class CognitoUserPoolIdentityProvider: IdentityProvider {
                 if let message = error.userInfo[Constants.ServiceError.message] as? String {
                     if message.contains(Constants.ServiceError.decodingError) {
                         completion(.failure(IdentityProviderError.invalidInput))
+                    } else if message.contains(Constants.ServiceError.alreadyRegisteredError) {
+                        completion(.failure(IdentityProviderError.alreadyRegistered))
                     } else if message.contains(Constants.ServiceError.serviceError) {
                         completion(.failure(IdentityProviderError.serviceError))
                     } else {

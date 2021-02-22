@@ -12,6 +12,7 @@ import Foundation
 ///     the provider was not valid.
 /// - invalidInput: Indicates bad input was provided to the API call.
 /// - identityNotConfirmed: identity is not confirmed hence cannot sign in yet.
+/// - alreadyRegistered: identity is already registered..
 /// - notAuthorized: Indicates the authentication failed. Likely due to incorrect private key, the identity
 ///     being removed from the backend or significant clock skew between the client and the backend.
 /// - notSignedIn: Indicates the API failed because the user is not signed-in.
@@ -24,6 +25,7 @@ public enum IdentityProviderError: Error {
     case invalidConfig
     case invalidInput
     case identityNotConfirmed
+    case alreadyRegistered
     case notAuthorized
     case notSignedIn
     case authTokenMissing
