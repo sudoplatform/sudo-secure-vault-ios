@@ -99,10 +99,23 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
     convenience public init(sudoUserClient: SudoUserClient, logger: Logger? = nil) throws {
         var config: [String: Any] = [:]
 
-        if let configManager = DefaultSudoConfigManager(),
-            let secureVaultServiceConfig = configManager.getConfigSet(namespace: Config.Namespace.secureVaultService) {
-            config[Config.Namespace.secureVaultService] = secureVaultServiceConfig
+        guard
+            let configManager = SudoConfigManagerFactory.instance.getConfigManager(
+                name: SudoConfigManagerFactory.Constants.defaultConfigManagerName
+        )
+        else {
+            throw SudoSecureVaultClientError.invalidConfig
         }
+
+        guard
+            let secureVaultServiceConfig = configManager.getConfigSet(
+                namespace: Config.Namespace.secureVaultService
+        )
+        else {
+            throw SudoSecureVaultClientError.secureVaultServiceConfigNotFound
+        }
+
+        config[Config.Namespace.secureVaultService] = secureVaultServiceConfig
 
         try self.init(config: config, sudoUserClient: sudoUserClient, logger: logger)
     }
@@ -135,7 +148,7 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
                                                            namespace: Constants.KeyManager.defaultKeyManagerNamespace)
 
         guard let secureVaultServiceConfig = config[Config.Namespace.secureVaultService] as? [String: Any] else {
-            throw SudoSecureVaultClientError.invalidConfig
+            throw SudoSecureVaultClientError.secureVaultServiceConfigNotFound
         }
 
         guard let pbkdfRounds = secureVaultServiceConfig[Config.SecureVaultService.pbkdfRounds] as? Int else {

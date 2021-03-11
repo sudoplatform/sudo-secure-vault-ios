@@ -254,168 +254,175 @@
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 35,
+      "line": 39,
       "symbol": "SudoSecureVaultClientError.alreadyRegistered",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 36,
+      "line": 40,
       "symbol": "SudoSecureVaultClientError.registerOperationAlreadyInProgress",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 37,
+      "line": 41,
       "symbol": "SudoSecureVaultClientError.notRegistered",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 38,
+      "line": 42,
       "symbol": "SudoSecureVaultClientError.notSignedIn",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 39,
+      "line": 43,
       "symbol": "SudoSecureVaultClientError.invalidOwnershipProofError",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 40,
+      "line": 44,
       "symbol": "SudoSecureVaultClientError.invalidConfig",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 41,
-      "symbol": "SudoSecureVaultClientError.authTokenMissing",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 42,
-      "symbol": "SudoSecureVaultClientError.versionMismatch",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 43,
-      "symbol": "SudoSecureVaultClientError.notAuthorized",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 44,
-      "symbol": "SudoSecureVaultClientError.invalidInput",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
       "line": 45,
-      "symbol": "SudoSecureVaultClientError.insufficientEntitlements",
+      "symbol": "SudoSecureVaultClientError.secureVaultServiceConfigNotFound",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
       "line": 46,
-      "symbol": "SudoSecureVaultClientError.serviceError",
+      "symbol": "SudoSecureVaultClientError.authTokenMissing",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
       "line": 47,
-      "symbol": "SudoSecureVaultClientError.graphQLError(description:)",
+      "symbol": "SudoSecureVaultClientError.versionMismatch",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
       "line": 48,
-      "symbol": "SudoSecureVaultClientError.fatalError(description:)",
+      "symbol": "SudoSecureVaultClientError.notAuthorized",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
+      "line": 49,
+      "symbol": "SudoSecureVaultClientError.invalidInput",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
+      "line": 50,
+      "symbol": "SudoSecureVaultClientError.insufficientEntitlements",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
+      "line": 51,
+      "symbol": "SudoSecureVaultClientError.serviceError",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
+      "line": 52,
+      "symbol": "SudoSecureVaultClientError.graphQLError(description:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
       "line": 53,
+      "symbol": "SudoSecureVaultClientError.fatalError(description:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
+      "line": 58,
       "symbol": "InitializationData.init(owner:authenticationSalt:encryptionSalt:pbkdfRounds:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 60,
+      "line": 65,
       "symbol": "InitializationData.owner",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 61,
+      "line": 66,
       "symbol": "InitializationData.authenticationSalt",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 62,
+      "line": 67,
       "symbol": "InitializationData.encryptionSalt",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 63,
+      "line": 68,
       "symbol": "InitializationData.pbkdfRounds",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 68,
+      "line": 73,
       "symbol": "Owner.init(id:issuer:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 73,
+      "line": 78,
       "symbol": "Owner.id",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 74,
+      "line": 79,
       "symbol": "Owner.issuer",
       "symbol_kind": "source.lang.swift.decl.var.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 103,
+      "line": 108,
       "symbol": "VaultMetadata.init(id:owner:version:blobFormat:createdAt:updatedAt:owners:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/anonyome/builds/c2dfa4ea/0/platform/secure-vault/sudo-secure-vault-ios/sudo-secure-vault-ios-gh/SudoSecureVault/SudoSecureVaultClient.swift",
-      "line": 131,
+      "line": 136,
       "symbol": "Vault.init(id:owner:version:blobFormat:createdAt:updatedAt:owners:blob:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

@@ -16,7 +16,11 @@ import UIKit
 /// - notSignedIn: Indicates the API being called requires the client to sign in.
 /// - notSignedIn: Indicates the API being called requires the client to sign in.
 /// - invalidOwnershipProofError: Indicates the ownership proof provided for the new vault was invalid.
-/// - authTokenMissing: Thrown when required authentication tokens were not return by Secure Vault service.
+/// - secureVaultServiceConfigNotFound: Indicates the configuration related to Secure Vault Service is
+///     not found. This may indicate that Secure Vault Service is not deployed into your runtime instance
+///     or the config file that you are using is invalid.
+/// - authTokenMissing: Thrown when required authentication tokens were not returned by Secure Vault
+///     service.
 /// - versionMismatch: Indicates the version of the vault that is getting updated does not match
 ///     the current version of the vault stored in the backend. The caller should retrieve the
 ///     current version of the vault and reconcile the difference..
@@ -31,13 +35,14 @@ import UIKit
 /// - fatalError: Indicates that a fatal error occurred. This could be due to
 ///     coding error, out-of-memory condition or other conditions that is
 ///     beyond control of `SudoSecureVaultClient` implementation.
-public enum SudoSecureVaultClientError: Error {
+public enum SudoSecureVaultClientError: Error, Equatable {
     case alreadyRegistered
     case registerOperationAlreadyInProgress
     case notRegistered
     case notSignedIn
     case invalidOwnershipProofError
     case invalidConfig
+    case secureVaultServiceConfigNotFound
     case authTokenMissing
     case versionMismatch
     case notAuthorized

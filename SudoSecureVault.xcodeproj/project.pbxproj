@@ -10,6 +10,7 @@
 		2071A658D1DD234A13C521BD /* Pods_SudoSecureVaultIntegrationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 72EF0BCFE9C346079D80AA7D /* Pods_SudoSecureVaultIntegrationTests.framework */; };
 		32401EAC2543522B00BA890A /* MockSudoSecureVaultClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32401EAB2543522B00BA890A /* MockSudoSecureVaultClient.swift */; };
 		587F6AC7C9A498AFE9981AAE /* Pods_SudoSecureVaultTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C449D9E19B55083AD9E5E4C4 /* Pods_SudoSecureVaultTests.framework */; };
+		5D3B8E8C25F9919700C0E4DE /* XCTestCase+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3B8E8B25F9919600C0E4DE /* XCTestCase+Utility.swift */; };
 		D748693D670F209762DEA0AB /* Pods_SudoSecureVault.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CCCA90D2ADF7A7578DD1FE /* Pods_SudoSecureVault.framework */; };
 		D9017FF0252BDF150059EB45 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9017FEF252BDF150059EB45 /* API.swift */; };
 		D901A9E123D6C44400A3FC70 /* sudoplatformconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = D901A9E023D6C44400A3FC70 /* sudoplatformconfig.json */; };
@@ -116,6 +117,7 @@
 		2B3B792FB1995377E9966320 /* Pods_TestApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32401EAB2543522B00BA890A /* MockSudoSecureVaultClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSudoSecureVaultClient.swift; sourceTree = "<group>"; };
 		3C34A3A5514BBD626DA281AB /* Pods-SudoSecureVaultTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoSecureVaultTests.release.xcconfig"; path = "Target Support Files/Pods-SudoSecureVaultTests/Pods-SudoSecureVaultTests.release.xcconfig"; sourceTree = "<group>"; };
+		5D3B8E8B25F9919600C0E4DE /* XCTestCase+Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "XCTestCase+Utility.swift"; sourceTree = "<group>"; };
 		72EF0BCFE9C346079D80AA7D /* Pods_SudoSecureVaultIntegrationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudoSecureVaultIntegrationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7360D3B621BEE707534D50F5 /* Pods-SudoSecureVaultIntegrationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoSecureVaultIntegrationTests.release.xcconfig"; path = "Target Support Files/Pods-SudoSecureVaultIntegrationTests/Pods-SudoSecureVaultIntegrationTests.release.xcconfig"; sourceTree = "<group>"; };
 		788995CA37D1FA570AB6E997 /* Pods-SudoSecureVault.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoSecureVault.release.xcconfig"; path = "Target Support Files/Pods-SudoSecureVault/Pods-SudoSecureVault.release.xcconfig"; sourceTree = "<group>"; };
@@ -253,6 +255,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5D3B8E8A25F9914400C0E4DE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5D3B8E8B25F9919600C0E4DE /* XCTestCase+Utility.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A498F8949F423D49D9498F0B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,6 +364,7 @@
 		D9A68FE922406BDC0073C07C /* SudoSecureVaultTests */ = {
 			isa = PBXGroup;
 			children = (
+				5D3B8E8A25F9914400C0E4DE /* Extensions */,
 				D9A68FEA22406BDC0073C07C /* SudoSecureVaultTests.swift */,
 				D9A68FEC22406BDC0073C07C /* Info.plist */,
 			);
@@ -916,6 +927,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9A68FEB22406BDC0073C07C /* SudoSecureVaultTests.swift in Sources */,
+				5D3B8E8C25F9919700C0E4DE /* XCTestCase+Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
