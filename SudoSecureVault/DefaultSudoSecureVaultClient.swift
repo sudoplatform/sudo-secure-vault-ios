@@ -63,7 +63,7 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
     private var keyManager: SudoKeyManager
 
     /// GraphQL client used calling Secure Vault service API.
-    private let graphQLClient: AWSAppSyncClient
+    private let graphQLClient: SudoApiClient
 
     public var version: String {
         return SUDO_SECURE_VAULT_VERSION
@@ -135,7 +135,7 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
                 sudoUserClient: SudoUserClient,
                 keyManager: SudoKeyManager? = nil,
                 identityProvider: IdentityProvider? = nil,
-                graphQLClient: AWSAppSyncClient? = nil,
+                graphQLClient: SudoApiClient? = nil,
                 logger: Logger? = nil) throws {
         let logger = logger ?? Logger.sudoSecureVaultLogger
         self.sudoUserClient = sudoUserClient
@@ -177,8 +177,9 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
                                                                   s3ObjectManager: nil,
                                                                   presignedURLClient: nil,
                                                                   retryStrategy: .aggressive)
-            self.graphQLClient = try AWSAppSyncClient(appSyncConfig: appSyncConfig)
-            self.graphQLClient.apolloClient?.cacheKeyForObject = { $0["id"] }
+            let appSyncClient = try AWSAppSyncClient(appSyncConfig: appSyncConfig)
+            appSyncClient.apolloClient?.cacheKeyForObject = { $0["id"] }
+            try self.graphQLClient = SudoApiClient(configProvider: configProvider, sudoUserClient: self.sudoUserClient, appSyncClient: appSyncClient)
         }
     }
 
@@ -258,33 +259,40 @@ public class DefaultSudoSecureVaultClient: SudoSecureVaultClient {
             throw SudoSecureVaultClientError.notSignedIn
         }
 
-        self.graphQLClient.fetch(query: GetInitializationDataQuery(), cachePolicy: .fetchIgnoringCacheData) { (result, error) in
-            if let error = error {
-                return completion(.failure(error))
-            }
+        do {
+            try self.graphQLClient.fetch(
+                query: GetInitializationDataQuery(),
+                cachePolicy: .fetchIgnoringCacheData,
+                resultHandler: { (result, error) in
+                    if let error = error {
+                        return completion(.failure(SudoSecureVaultClientError.fromApiOperationError(error: error)))
+                    }
 
-            guard let result = result else {
-                return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Query returned nil result.")))
-            }
+                    guard let result = result else {
+                        return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Query returned nil result.")))
+                    }
 
-            if let errors = result.errors {
-                let message = "Query failed with errors: \(errors)"
-                self.logger.error(message)
-                return completion(.failure(SudoSecureVaultClientError.graphQLError(description: message)))
-            }
+                    if let error = result.errors?.first {
+                        self.logger.error("Query failed with errors: \(error)")
+                        return completion(.failure(SudoSecureVaultClientError.fromApiOperationError(error: error)))
+                    }
 
-            guard let initializationData = result.data?.getInitializationData else {
-                return completion(.success(nil))
-            }
+                    guard let initializationData = result.data?.getInitializationData else {
+                        return completion(.success(nil))
+                    }
 
-            guard let authenticationSalt = Data(base64Encoded: initializationData.authenticationSalt),
-                  let encryptionSalt = Data(base64Encoded: initializationData.encryptionSalt) else {
-                return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Failed to decode salts in the initialization data.")))
-            }
+                    guard let authenticationSalt = Data(base64Encoded: initializationData.authenticationSalt),
+                          let encryptionSalt = Data(base64Encoded: initializationData.encryptionSalt) else {
+                        return completion(.failure(SudoSecureVaultClientError.fatalError(description: "Failed to decode salts in the initialization data.")))
+                    }
 
-            let data = InitializationData(owner: initializationData.owner, authenticationSalt: authenticationSalt, encryptionSalt: encryptionSalt, pbkdfRounds: initializationData.pbkdfRounds)
-            self.initializationData = data
-            completion(.success(data))
+                    let data = InitializationData(owner: initializationData.owner, authenticationSalt: authenticationSalt, encryptionSalt: encryptionSalt, pbkdfRounds: initializationData.pbkdfRounds)
+                    self.initializationData = data
+                    completion(.success(data))
+                }
+            )
+        } catch {
+            throw SudoSecureVaultClientError.fromApiOperationError(error: error)
         }
     }
 

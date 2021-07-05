@@ -7,11 +7,12 @@
 import SudoLogging
 import SudoKeyManager
 import AWSAppSync
+import SudoApiClient
 
 /// Operation to degister an exising vault user.
 class Deregister: SecureVaultOperation {
 
-    private unowned let graphQLClient: AWSAppSyncClient
+    private unowned let graphQLClient: SudoApiClient
 
     var uid: String?
 
@@ -21,37 +22,47 @@ class Deregister: SecureVaultOperation {
     ///
     ///   - graphQLClient: GraphQL client used to make backend API calls.
     ///   - logger: Logger used for logging.
-    init(graphQLClient: AWSAppSyncClient,
-         logger: Logger = Logger.sudoSecureVaultLogger) {
+    init(
+        graphQLClient: SudoApiClient,
+        logger: Logger = Logger.sudoSecureVaultLogger
+    ) {
         self.graphQLClient = graphQLClient
         super.init(logger: logger)
     }
 
     override func execute() {
-        self.graphQLClient.perform(mutation: DeregisterMutation(), resultHandler: { (result, error) in
-            if let error = error {
-                self.error = error
-                return self.done()
-            }
+        do {
+            try self.graphQLClient.perform(
+                mutation: DeregisterMutation(),
+                resultHandler: { (result, error) in
+                    if let error = error {
+                        self.error = SudoSecureVaultClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
 
-            guard let result = result else {
-                self.error = SudoSecureVaultClientError.fatalError(description: "Mutation completed successfully but result is missing.")
-                return self.done()
-            }
+                    guard let result = result else {
+                        self.error = SudoSecureVaultClientError.fatalError(description: "Mutation completed successfully but result is missing.")
+                        return self.done()
+                    }
 
-            if let error = result.errors?.first {
-                self.error = self.graphQLErrorToClientError(error: error)
-                return self.done()
-            }
+                    if let error = result.errors?.first {
+                        self.error = SudoSecureVaultClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
 
-            guard let deregister = result.data?.deregister else {
-                self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
-                return self.done()
-            }
+                    guard let deregister = result.data?.deregister else {
+                        self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
+                        return self.done()
+                    }
 
-            self.uid = deregister.username
+                    self.uid = deregister.username
+                    self.done()
+                }
+            )
+        } catch {
+            self.error = SudoSecureVaultClientError.fromApiOperationError(error: error)
             self.done()
-        })
+        }
     }
 
 }

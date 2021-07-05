@@ -7,11 +7,12 @@
 import SudoLogging
 import SudoKeyManager
 import AWSAppSync
+import SudoApiClient
 
 /// Operation to delete an existing vault.
 class DeleteVault: SecureVaultOperation {
 
-    private unowned let graphQLClient: AWSAppSyncClient
+    private unowned let graphQLClient: SudoApiClient
 
     private let guid: String
 
@@ -24,40 +25,58 @@ class DeleteVault: SecureVaultOperation {
     ///   - id: Vault ID.
     ///   - graphQLClient: GraphQL client used to make backend API calls.
     ///   - logger: Logger used for logging.
-    init(id: String,
-         graphQLClient: AWSAppSyncClient,
-         logger: Logger = Logger.sudoSecureVaultLogger) {
+    init(
+        id: String,
+        graphQLClient: SudoApiClient,
+        logger: Logger = Logger.sudoSecureVaultLogger
+    ) {
         self.guid = id
         self.graphQLClient = graphQLClient
         super.init(logger: logger)
     }
 
     override func execute() {
-        let input = DeleteVaultInput(id: self.guid)
-        self.graphQLClient.perform(mutation: DeleteVaultMutation(input: input), resultHandler: { (result, error) in
-            if let error = error {
-                self.error = error
-                return self.done()
-            }
+        do {
+            let input = DeleteVaultInput(id: self.guid)
+            try self.graphQLClient.perform(
+                mutation: DeleteVaultMutation(input: input),
+                resultHandler: { (result, error) in
+                    if let error = error {
+                        self.error = SudoSecureVaultClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
 
-            guard let result = result else {
-                self.error = SudoSecureVaultClientError.fatalError(description: "Mutation completed successfully but result is missing.")
-                return self.done()
-            }
+                    guard let result = result else {
+                        self.error = SudoSecureVaultClientError.fatalError(description: "Mutation completed successfully but result is missing.")
+                        return self.done()
+                    }
 
-            if let error = result.errors?.first {
-                self.error = self.graphQLErrorToClientError(error: error)
-                return self.done()
-            }
+                    if let error = result.errors?.first {
+                        self.error = SudoSecureVaultClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
 
-            guard let updateVault = result.data?.deleteVault else {
-                self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
-                return self.done()
-            }
-            self.vaultMetadata = VaultMetadata(id: updateVault.id, owner: updateVault.owner, version: updateVault.version, blobFormat: updateVault.blobFormat, createdAt: Date(millisecondsSinceEpoch: updateVault.createdAtEpochMs), updatedAt: Date(millisecondsSinceEpoch: updateVault.updatedAtEpochMs), owners: updateVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }))
+                    guard let updateVault = result.data?.deleteVault else {
+                        self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
+                        return self.done()
+                    }
+                    self.vaultMetadata = VaultMetadata(
+                        id: updateVault.id,
+                        owner: updateVault.owner,
+                        version: updateVault.version,
+                        blobFormat: updateVault.blobFormat,
+                        createdAt: Date(millisecondsSinceEpoch: updateVault.createdAtEpochMs),
+                        updatedAt: Date(millisecondsSinceEpoch: updateVault.updatedAtEpochMs),
+                        owners: updateVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) })
+                    )
 
+                    self.done()
+                }
+            )
+        } catch {
+            self.error =    SudoSecureVaultClientError.fromApiOperationError(error: error)
             self.done()
-        })
+        }
     }
 
 }

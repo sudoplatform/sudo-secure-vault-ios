@@ -7,6 +7,7 @@
 import SudoLogging
 import SudoKeyManager
 import AWSAppSync
+import SudoApiClient
 
 /// Operation to update an existing vault.
 class UpdateVault: SecureVaultOperation {
@@ -21,7 +22,7 @@ class UpdateVault: SecureVaultOperation {
 
     }
 
-    private unowned let graphQLClient: AWSAppSyncClient
+    private unowned let graphQLClient: SudoApiClient
 
     private let keyManager: SudoKeyManager
 
@@ -52,15 +53,17 @@ class UpdateVault: SecureVaultOperation {
     ///   - keyManager: KeyManager to use for cryptographic operations.
     ///   - graphQLClient: GraphQL client used to make backend API calls.
     ///   - logger: Logger used for logging.
-    init(token: String? = nil,
-         key: Data,
-         id: String,
-         expectedVersion: Int,
-         blob: Data,
-         blobFormat: String,
-         keyManager: SudoKeyManager,
-         graphQLClient: AWSAppSyncClient,
-         logger: Logger = Logger.sudoSecureVaultLogger) {
+    init(
+        token: String? = nil,
+        key: Data,
+        id: String,
+        expectedVersion: Int,
+        blob: Data,
+        blobFormat: String,
+        keyManager: SudoKeyManager,
+        graphQLClient: SudoApiClient,
+        logger: Logger = Logger.sudoSecureVaultLogger
+    ) {
         self.token = token
         self.key = key
         self.guid = id
@@ -88,31 +91,55 @@ class UpdateVault: SecureVaultOperation {
             return self.done()
         }
 
-        let input = UpdateVaultInput(token: token, id: self.guid, expectedVersion: self.expectedVersion, blob: encrypted.base64EncodedString(), blobFormat: self.blobFormat, encryptionMethod: Constants.encryptionMethod)
-        self.graphQLClient.perform(mutation: UpdateVaultMutation(input: input), resultHandler: { (result, error) in
-            if let error = error {
-                self.error = error
-                return self.done()
-            }
+        let input = UpdateVaultInput(
+            token: token, id: self.guid,
+            expectedVersion: self.expectedVersion,
+            blob: encrypted.base64EncodedString(),
+            blobFormat: self.blobFormat,
+            encryptionMethod: Constants.encryptionMethod
+        )
 
-            guard let result = result else {
-                self.error = SudoSecureVaultClientError.fatalError(description: "Mutation completed successfully but result is missing.")
-                return self.done()
-            }
+        do {
+            try self.graphQLClient.perform(
+                mutation: UpdateVaultMutation(input: input),
+                resultHandler: { (result, error) in
+                    if let error = error {
+                        self.error = SudoSecureVaultClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
 
-            if let error = result.errors?.first {
-                self.error = self.graphQLErrorToClientError(error: error)
-                return self.done()
-            }
+                    guard let result = result else {
+                        self.error = SudoSecureVaultClientError.fatalError(description: "Mutation completed successfully but result is missing.")
+                        return self.done()
+                    }
 
-            guard let updateVault = result.data?.updateVault else {
-                self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
-                return self.done()
-            }
-            self.vaultMetadata = VaultMetadata(id: updateVault.id, owner: updateVault.owner, version: updateVault.version, blobFormat: updateVault.blobFormat, createdAt: Date(millisecondsSinceEpoch: updateVault.createdAtEpochMs), updatedAt: Date(millisecondsSinceEpoch: updateVault.updatedAtEpochMs), owners: updateVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }))
+                    if let error = result.errors?.first {
+                        self.error = SudoSecureVaultClientError.fromApiOperationError(error: error)
+                        return self.done()
+                    }
 
+                    guard let updateVault = result.data?.updateVault else {
+                        self.error = SudoSecureVaultClientError.fatalError(description: "Mutation result did not contain required object.")
+                        return self.done()
+                    }
+                    self.vaultMetadata = VaultMetadata(
+                        id: updateVault.id,
+                        owner: updateVault.owner,
+                        version: updateVault.version,
+                        blobFormat: updateVault.blobFormat,
+                        createdAt: Date(millisecondsSinceEpoch: updateVault.createdAtEpochMs),
+                        updatedAt: Date(millisecondsSinceEpoch: updateVault.updatedAtEpochMs),
+                        owners: updateVault.owners.map({ Owner(id: $0.id, issuer: $0.issuer) }
+                        )
+                    )
+
+                    self.done()
+                }
+            )
+        } catch {
+            self.error = SudoSecureVaultClientError.fromApiOperationError(error: error)
             self.done()
-        })
+        }
     }
 
 }

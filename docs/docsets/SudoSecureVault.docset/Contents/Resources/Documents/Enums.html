@@ -21,7 +21,7 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
-          SudoSecureVault 5.0.0 Docs
+          SudoSecureVault 6.0.0 Docs
         </a>
         
       </p>
@@ -75,9 +75,6 @@
               </li>
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Enums.html#/s:15SudoSecureVault0bC14OperationErrorO">SecureVaultOperationError</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Enums.html#/s:15SudoSecureVault0abC11ClientErrorO">SudoSecureVaultClientError</a>
               </li>
             </ul>
           </li>
@@ -253,62 +250,6 @@ beyond control of <code>RegisterOperation</code> implementation.</li>
                     </section>
                   </div>
                 </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:15SudoSecureVault0abC11ClientErrorO"></a>
-                    <a name="//apple_ref/swift/Enum/SudoSecureVaultClientError" class="dashAnchor"></a>
-                    <a class="token" href="#/s:15SudoSecureVault0abC11ClientErrorO">SudoSecureVaultClientError</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>List of possible errors thrown by <code><a href="Protocols/SudoSecureVaultClient.html">SudoSecureVaultClient</a></code> implementation.</p>
-
-<ul>
-<li>alreadyRegistered: Thrown when attempting to register but the client is already registered.</li>
-<li>registerOperationAlreadyInProgress: Thrown when duplicate register calls are made.</li>
-<li>notRegistered: Indicates the client has not been registered to the
-Sudo platform backend.</li>
-<li>notSignedIn: Indicates the API being called requires the client to sign in.</li>
-<li>notSignedIn: Indicates the API being called requires the client to sign in.</li>
-<li>invalidOwnershipProofError: Indicates the ownership proof provided for the new vault was invalid.</li>
-<li>secureVaultServiceConfigNotFound: Indicates the configuration related to Secure Vault Service is
-not found. This may indicate that Secure Vault Service is not deployed into your runtime instance
-or the config file that you are using is invalid.</li>
-<li>authTokenMissing: Thrown when required authentication tokens were not returned by Secure Vault
-service.</li>
-<li>versionMismatch: Indicates the version of the vault that is getting updated does not match
-the current version of the vault stored in the backend. The caller should retrieve the
-current version of the vault and reconcile the difference..</li>
-<li>notAuthorized: Indicates the authentication failed. Likely due to incorrect private key, the identity
-being removed from the backend or significant clock skew between the client and the backend.</li>
-<li>invalidInput: Indicates the input to the API was invalid.</li>
-<li>insufficientEntitlements: Operation failed due to the user not having sufficient entitlements.</li>
-<li>serviceError: Indicates that an internal server error caused the operation to fail. The error is
-possibly transient and retrying at a later time may cause the operation to complete
-successfully</li>
-<li>graphQLError: Indicates that a GraphQL error was returned by the backend.</li>
-<li>fatalError: Indicates that a fatal error occurred. This could be due to
-coding error, out-of-memory condition or other conditions that is
-beyond control of <code><a href="Protocols/SudoSecureVaultClient.html">SudoSecureVaultClient</a></code> implementation.</li>
-</ul>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">SudoSecureVaultClientError</span> <span class="p">:</span> <span class="kt">Error</span><span class="p">,</span> <span class="kt">Equatable</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
               </ul>
             </div>
           </div>
@@ -317,7 +258,7 @@ beyond control of <code><a href="Protocols/SudoSecureVaultClient.html">SudoSecur
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2021 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2021-03-11)</p>
+      <p>&copy; 2021 <a class="link" href="https://sudoplatform.com" target="_blank" rel="external">Sudo Platform Engineering</a>. All rights reserved. (Last updated: 2021-07-05)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>

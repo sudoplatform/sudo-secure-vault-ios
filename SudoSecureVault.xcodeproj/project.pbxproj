@@ -13,7 +13,6 @@
 		5D3B8E8C25F9919700C0E4DE /* XCTestCase+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D3B8E8B25F9919600C0E4DE /* XCTestCase+Utility.swift */; };
 		D748693D670F209762DEA0AB /* Pods_SudoSecureVault.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0CCCA90D2ADF7A7578DD1FE /* Pods_SudoSecureVault.framework */; };
 		D9017FF0252BDF150059EB45 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9017FEF252BDF150059EB45 /* API.swift */; };
-		D901A9E123D6C44400A3FC70 /* sudoplatformconfig.json in Resources */ = {isa = PBXBuildFile; fileRef = D901A9E023D6C44400A3FC70 /* sudoplatformconfig.json */; };
 		D928A86D22D8558600D270B6 /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = D928A86C22D8558600D270B6 /* Auth0.plist */; };
 		D94474A4227BEDF400C0872E /* CognitoUserPoolIdentityProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D94474A3227BEDF400C0872E /* CognitoUserPoolIdentityProvider.swift */; };
 		D944EA9123597C8C00508708 /* SudoSecureVault-Swift.h in Headers */ = {isa = PBXBuildFile; fileRef = D9A68FDF22406BDC0073C07C /* SudoSecureVault-Swift.h */; };
@@ -129,7 +128,6 @@
 		BD1ADF96715646A47150241F /* Pods-SudoSecureVaultTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SudoSecureVaultTests.debug.xcconfig"; path = "Target Support Files/Pods-SudoSecureVaultTests/Pods-SudoSecureVaultTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C449D9E19B55083AD9E5E4C4 /* Pods_SudoSecureVaultTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SudoSecureVaultTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9017FEF252BDF150059EB45 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		D901A9E023D6C44400A3FC70 /* sudoplatformconfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sudoplatformconfig.json; sourceTree = "<group>"; };
 		D928A86C22D8558600D270B6 /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
 		D94474A3227BEDF400C0872E /* CognitoUserPoolIdentityProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoUserPoolIdentityProvider.swift; sourceTree = "<group>"; };
 		D9457DF92536C39D0009271A /* Deregister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deregister.swift; sourceTree = "<group>"; };
@@ -297,7 +295,6 @@
 			isa = PBXGroup;
 			children = (
 				D9F0B70A225191B800D085E1 /* TestApp.entitlements */,
-				D901A9E023D6C44400A3FC70 /* sudoplatformconfig.json */,
 				D94A11C32240D9EC00271C28 /* AppDelegate.swift */,
 				D94A11C52240D9EC00271C28 /* ViewController.swift */,
 				D94A11C72240D9EC00271C28 /* Main.storyboard */,
@@ -626,7 +623,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D9F27D2922DC3D4200441D3F /* awsconfiguration.json in Resources */,
-				D901A9E123D6C44400A3FC70 /* sudoplatformconfig.json in Resources */,
 				D94A11CE2240D9ED00271C28 /* LaunchScreen.storyboard in Resources */,
 				D94A11CB2240D9ED00271C28 /* Assets.xcassets in Resources */,
 				D94A11C92240D9EC00271C28 /* Main.storyboard in Resources */,
@@ -821,7 +817,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp -f identity-system-test-config/config.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncp -f identity-system-test-config/config.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/config.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/sudoplatformconfig.json\" || :\n";
 		};
 		D98138D9224CCA7400D298B2 /* Copy TEST keys */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -839,7 +835,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -f /var/anonyome_key/* \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/anonyome_ssm_parameter_register_key.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/config.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/fsso.key \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/fsso.id \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\n";
+			shellScript = "cp -f /var/anonyome_key/* \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/anonyome_ssm_parameter_register_key.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/config.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/config.json \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/sudoplatformconfig.json\" || :\ncp -f identity-system-test-config/fsso.key \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\ncp -f identity-system-test-config/fsso.id \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" || :\n";
 		};
 		F34DDBAA821D5FB0EC218E1E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

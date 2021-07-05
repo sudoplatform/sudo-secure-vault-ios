@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                  = 'SudoSecureVault'
-  spec.version               = '5.0.0'
+  spec.version               = '6.0.0'
   spec.author                = { 'Sudo Platform Engineering' => 'sudoplatform-engineering@anonyome.com' }
   spec.homepage              = 'https://sudoplatform.com'
   spec.summary               = 'User SDK for the Sudo Platform by Anonyome Labs.'
@@ -11,12 +11,11 @@ Pod::Spec.new do |spec|
   spec.requires_arc          = true
   spec.swift_version         = '5.0'
 
-  spec.dependency 'SudoUser', '~> 11.0'
+  spec.dependency 'SudoUser', '~> 12.0'
   spec.dependency 'SudoKeyManager', '~> 1.2'
-  spec.dependency 'SudoApiClient', '~> 4.0'
+  spec.dependency 'SudoApiClient', '~> 6.0'
   spec.dependency 'SudoLogging', '~> 0.3'
   spec.dependency 'SudoConfigManager', '~> 1.4'
-  spec.dependency 'AWSCognitoIdentityProvider', '~> 2.15'
-  spec.dependency 'AWSAppSync', '~> 3.1'
-  spec.dependency 'AWSCore', '~> 2.15'
+  spec.dependency 'AWSCognitoIdentityProvider', '~> 2.24.2'
+  spec.dependency 'AWSCore', '~> 2.24.2'
 end

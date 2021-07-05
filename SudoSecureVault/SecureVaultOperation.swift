@@ -25,16 +25,6 @@ public enum SecureVaultOperationState: Int {
 /// that all subclasses are expected to provide.
 open class SecureVaultOperation: Operation {
 
-    struct SecureVaultServiceError {
-        static let type = "errorType"
-        static let serviceError = "sudoplatform.ServiceError"
-        static let insufficientEntitlementsError = "sudoplatform.InsufficientEntitlementsError"
-        static let conditionalCheckFailedException = "DynamoDB:ConditionalCheckFailedException"
-        static let invalidOwnershipProofError = "sudoplatform.vault.InvalidOwnershipProofError"
-        static let notAuthorizedError = "sudoplatform.vault.NotAuthorizedError"
-        static let tokenValidationError = "sudoplatform.vault.TokenValidationError"
-    }
-
     private struct Constants {
         static let IsExecuting = "isExecuting"
         static let IsFinished = "isFinished"
@@ -211,32 +201,6 @@ open class SecureVaultOperation: Operation {
         self.willChangeValue(forKey: Constants.IsCancelled)
         self.stateLock.withCriticalScope { _cancelled = true }
         self.didChangeValue(forKey: Constants.IsCancelled)
-    }
-
-    open func graphQLErrorToClientError(error: GraphQLError) -> SudoSecureVaultClientError {
-        let message = "\(type(of: self)) received GraphQL error: \(error)"
-        self.logger.error(message)
-
-        if let errorType = error[SecureVaultOperation.SecureVaultServiceError.type] as? String {
-            switch errorType {
-            case SecureVaultOperation.SecureVaultServiceError.tokenValidationError:
-                return SudoSecureVaultClientError.notAuthorized
-            case SecureVaultOperation.SecureVaultServiceError.notAuthorizedError:
-                return SudoSecureVaultClientError.notAuthorized
-            case SecureVaultOperation.SecureVaultServiceError.invalidOwnershipProofError:
-                return SudoSecureVaultClientError.invalidOwnershipProofError
-            case SecureVaultOperation.SecureVaultServiceError.insufficientEntitlementsError:
-                return SudoSecureVaultClientError.insufficientEntitlements
-            case SecureVaultOperation.SecureVaultServiceError.conditionalCheckFailedException:
-                return SudoSecureVaultClientError.versionMismatch
-            case SecureVaultOperation.SecureVaultServiceError.serviceError:
-                return SudoSecureVaultClientError.serviceError
-            default:
-                return SudoSecureVaultClientError.graphQLError(description: message)
-            }
-        } else {
-            return SudoSecureVaultClientError.graphQLError(description: message)
-        }
     }
 
 }

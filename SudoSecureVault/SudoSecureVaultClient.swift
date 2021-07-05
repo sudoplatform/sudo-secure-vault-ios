@@ -6,53 +6,130 @@
 
 import Foundation
 import UIKit
+import SudoApiClient
 
-/// List of possible errors thrown by `SudoSecureVaultClient` implementation.
-///
-/// - alreadyRegistered: Thrown when attempting to register but the client is already registered.
-/// - registerOperationAlreadyInProgress: Thrown when duplicate register calls are made.
-/// - notRegistered: Indicates the client has not been registered to the
-///     Sudo platform backend.
-/// - notSignedIn: Indicates the API being called requires the client to sign in.
-/// - notSignedIn: Indicates the API being called requires the client to sign in.
-/// - invalidOwnershipProofError: Indicates the ownership proof provided for the new vault was invalid.
-/// - secureVaultServiceConfigNotFound: Indicates the configuration related to Secure Vault Service is
-///     not found. This may indicate that Secure Vault Service is not deployed into your runtime instance
-///     or the config file that you are using is invalid.
-/// - authTokenMissing: Thrown when required authentication tokens were not returned by Secure Vault
-///     service.
-/// - versionMismatch: Indicates the version of the vault that is getting updated does not match
-///     the current version of the vault stored in the backend. The caller should retrieve the
-///     current version of the vault and reconcile the difference..
-/// - notAuthorized: Indicates the authentication failed. Likely due to incorrect private key, the identity
-///     being removed from the backend or significant clock skew between the client and the backend.
-/// - invalidInput: Indicates the input to the API was invalid.
-/// - insufficientEntitlements: Operation failed due to the user not having sufficient entitlements.
-/// - serviceError: Indicates that an internal server error caused the operation to fail. The error is
-///     possibly transient and retrying at a later time may cause the operation to complete
-///     successfully
-/// - graphQLError: Indicates that a GraphQL error was returned by the backend.
-/// - fatalError: Indicates that a fatal error occurred. This could be due to
-///     coding error, out-of-memory condition or other conditions that is
-///     beyond control of `SudoSecureVaultClient` implementation.
-public enum SudoSecureVaultClientError: Error, Equatable {
+public enum SudoSecureVaultClientError: Error {
+
+    /// Indicates that an attempt to register was made but the client is already registered.
     case alreadyRegistered
+
+    /// Indicates that an attempt to register was made but there's already one in progress.
     case registerOperationAlreadyInProgress
+
+    /// Indicates the client has not been registered to the Sudo platform backend.
     case notRegistered
-    case notSignedIn
+
+    /// Indicates the ownership proof provided for the new vault was invalid.
     case invalidOwnershipProofError
-    case invalidConfig
-    case secureVaultServiceConfigNotFound
+
+    /// Indicates the required authentication tokens were not returned by Secure Vault Service.
     case authTokenMissing
-    case versionMismatch
-    case notAuthorized
+
+    /// Indicates that the configuration dictionary passed to initialize the client was not valid.
+    case invalidConfig
+
+    /// Indicates the configuration related to Secure Vault Service is not found. This may indicate that Secure Vault
+    /// Service is not deployed into your runtime instance or the config file that you are using is invalid..
+    case secureVaultServiceConfigNotFound
+
+    /// Indicates that the input to the API was invalid.
     case invalidInput
+
+    /// Indicates the requested operation failed because the user account is locked.
+    case accountLock
+
+    /// Indicates the API being called requires the client to sign in.
+    case notSignedIn
+
+    /// Indicates that the request operation failed due to authorization error. This maybe due to the authentication
+    /// token being invalid or other security controls that prevent the user from accessing the API.
+    case notAuthorized
+
+    /// Indicates API call failed due to it requiring tokens to be refreshed but something else is already in
+    /// middle of refreshing the tokens.
+    case refreshTokensOperationAlreadyInProgress
+
+    /// Indicates API call  failed due to it exceeding some limits imposed for the API. For example, this error
+    /// can occur if the vault size was too big.
+    case limitExceeded
+
+    /// Indicates that the user does not have sufficient entitlements to perform the requested operation.
     case insufficientEntitlements
+
+    /// Indicates the version of the vault that is getting updated does not match the current version of the vault stored
+    /// in the backend. The caller should retrieve the current version of the vault and reconcile the difference.
+    case versionMismatch
+
+    /// Indicates that an internal server error caused the operation to fail. The error is possibly transient and
+    /// retrying at a later time may cause the operation to complete successfully
     case serviceError
+
+    /// Indicates that the request failed due to connectivity, availability or access error.
+    case requestFailed(response: HTTPURLResponse?, cause: Error?)
+
+    /// Indicates that there were too many attempts at sending API requests within a short period of time.
+    case rateLimitExceeded
+
+    /// Indicates that a GraphQL error was returned by the backend.
     case graphQLError(description: String)
+
+    /// Indicates that a fatal error occurred. This could be due to coding error, out-of-memory condition or other
+    /// conditions that is beyond control of `SudoSecureVaultClient` implementation.
     case fatalError(description: String)
 }
 
+extension SudoSecureVaultClientError {
+
+    struct Constants {
+        static let errorType = "errorType"
+        static let invalidOwnershipProofError = "sudoplatform.vault.InvalidOwnershipProofError"
+        static let notAuthorizedError = "sudoplatform.vault.NotAuthorizedError"
+        static let tokenValidationError = "sudoplatform.vault.TokenValidationError"
+    }
+
+    static func fromApiOperationError(error: Error) -> SudoSecureVaultClientError {
+        switch error {
+        case ApiOperationError.accountLocked:
+            return .accountLock
+        case ApiOperationError.notSignedIn:
+            return .notSignedIn
+        case ApiOperationError.notAuthorized:
+            return .notAuthorized
+        case ApiOperationError.refreshTokensOperationAlreadyInProgress:
+            return .refreshTokensOperationAlreadyInProgress
+        case ApiOperationError.limitExceeded:
+            return .limitExceeded
+        case ApiOperationError.insufficientEntitlements:
+            return .insufficientEntitlements
+        case ApiOperationError.serviceError:
+            return .serviceError
+        case ApiOperationError.versionMismatch:
+            return .versionMismatch
+        case ApiOperationError.invalidRequest:
+            return .invalidInput
+        case ApiOperationError.rateLimitExceeded:
+            return .rateLimitExceeded
+        case ApiOperationError.graphQLError(let cause):
+            guard let errorType = cause[Constants.errorType] as? String else {
+              return .fatalError(description: "GraphQL operation failed but error type was not found in the response. \(error)")
+            }
+
+            switch errorType {
+            case Constants.invalidOwnershipProofError:
+                return .invalidOwnershipProofError
+            case Constants.notAuthorizedError, Constants.tokenValidationError:
+                return .notAuthorized
+            default:
+                return .graphQLError(description: "Unexpected GraphQL error: \(cause)")
+            }
+        case ApiOperationError.requestFailed(let response, let cause):
+            return .requestFailed(response: response, cause: cause)
+        default:
+            return .fatalError(description: "Unexpected API operation error: \(error)")
+        }
+    }
+
+}
 /// Data required to initialize the client.
 public struct InitializationData {
     public init(owner: String, authenticationSalt: Data, encryptionSalt: Data, pbkdfRounds: Int) {
@@ -165,7 +242,7 @@ public struct Vault: Metadata {
 
 /// Protocol encapsulating a library of functions for calling Sudo Platform
 /// Secure Vault service, managing keys, performing cryptographic operations.
-public protocol SudoSecureVaultClient: class {
+public protocol SudoSecureVaultClient: AnyObject {
 
     /// The release version of this instance of `SudoSecureVaultClient`.
     var version: String { get }
