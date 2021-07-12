@@ -36,7 +36,7 @@ public enum SudoSecureVaultClientError: Error {
     case invalidInput
 
     /// Indicates the requested operation failed because the user account is locked.
-    case accountLock
+    case accountLocked
 
     /// Indicates the API being called requires the client to sign in.
     case notSignedIn
@@ -90,7 +90,7 @@ extension SudoSecureVaultClientError {
     static func fromApiOperationError(error: Error) -> SudoSecureVaultClientError {
         switch error {
         case ApiOperationError.accountLocked:
-            return .accountLock
+            return .accountLocked
         case ApiOperationError.notSignedIn:
             return .notSignedIn
         case ApiOperationError.notAuthorized:
